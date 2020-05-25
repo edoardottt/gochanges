@@ -9,7 +9,12 @@
 </p>
 <!-- badges -->
 <p align="center">
-  <a href="https://github.com/simonepri/upash/tree/master/license">
+  <!-- build -->
+  <a href="#">
     <img src="https://github.com/edoardottt/gochanges/workflows/Go/badge.svg" alt="Go workflows" />
+  </a>
+  <!-- go report card -->
+  <a href="https://goreportcard.com/badge/github.com/edoardottt/gochange">
+    <img src="https://goreportcard.com/badge/github.com/edoardottt/gochanges" alt="Go workflows" />
   </a>
 </p>
