@@ -2,7 +2,7 @@
 ADD LICENSE
  */
 
-package common
+package scraper
 
 import (
 	"fmt"

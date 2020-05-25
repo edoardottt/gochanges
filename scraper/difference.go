@@ -2,4 +2,4 @@
 ADD LICENSE
  */
 
-package common
+package scraper

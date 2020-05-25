@@ -5,9 +5,9 @@ ADD LICENSE
 package main
 
 import (
-	comm "github.com/edoardottt/gochanges/common"
+	"github.com/edoardottt/gochanges/scraper"
 )
 
 func main() {
-	comm.ParseUrl("http://www.google.com/robots.txt")
+	scraper.ParseUrl("http://www.google.com/robots.txt")
 }
