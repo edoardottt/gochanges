@@ -9,5 +9,7 @@ import (
 )
 
 func main() {
-	scraper.ParseUrl("http://www.google.com/robots.txt")
+	u := "http://www.google.com/robots.txt"
+	scraper.ParseUrl(u)
+	scraper.GetContent(u)
 }
