@@ -5,12 +5,9 @@ ADD LICENSE
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
+	"github.com/edoardottt/gochanges/common"
 )
 
 func main() {
-
+	common.ParseUrl("http://www.google.com/robots.txt")
 }

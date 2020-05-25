@@ -9,15 +9,25 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 // TODO
-type Website struct {
+func ParseUrl(urlPath string)  url.URL {
 
+	u, err := url.Parse(urlPath)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(u)
+	return *u
 }
 
-func Connect() {
-	res, err := http.Get("http://www.google.com/robots.txt")
+// TODO
+func Connect(u string) {
+
+	res, err := http.Get(u)
 	if err != nil {
 		log.Fatal(err)
 	}
