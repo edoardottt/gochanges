@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	u := "http://www.google.com/robots.txt"
-	scraper.ParseUrl(u)
-	scraper.GetContent(u)
+	u := "https://www.google.com"
+	interval := 3
+	m := scraper.AddMonitor(u, interval)
+	scraper.StartMonitoring(m)
 }

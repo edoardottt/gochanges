@@ -11,7 +11,7 @@ import (
 // TODO
 type Change struct {
 	monitor 	Monitor
-	body		[]byte
+	body		string
 	timestamp	int64
 }
 
@@ -20,3 +20,7 @@ func GetCurrentTimestamp() int64 {
 	return time.Now().Unix()
 }
 
+// TODO
+func Edited(change Change, content string) bool {
+	return change.body != content
+}

@@ -10,11 +10,12 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type Monitor struct {
 	website 	string
-	interval 	int
+	seconds 	int
 }
 
 // TODO
@@ -44,12 +45,12 @@ func AddMonitor(address string, interval int) Monitor {
 		log.Fatal(err)
 	}
 	monitor.website = address
-	monitor.interval = interval
+	monitor.seconds = interval
 	return monitor
 }
 
 // TODO
-func GetContent(u string) []byte {
+func GetContent(u string) string {
 	res, err := http.Get(u)
 	if err != nil {
 		log.Fatal(err)
@@ -60,6 +61,27 @@ func GetContent(u string) []byte {
 		log.Fatal(err)
 	}
 	fmt.Printf("%s", body)	//DEBUG
-	return body
+	return string(body)
 }
 
+// TODO
+func doEvery(d time.Duration, f func(u string) string, monitor Monitor, change Change) {
+	for _ = range time.Tick(d) {
+		content := f(monitor.website)
+		newTimestamp := GetCurrentTimestamp()
+		edited := Edited(change, content)
+		if edited {
+			// TODO
+			fmt.Println("edited")
+		}
+		fmt.Println(newTimestamp)
+		fmt.Println(content)
+	}
+}
+
+// TODO
+func StartMonitoring(monitor Monitor) {
+	change := Change{monitor: monitor, timestamp: GetCurrentTimestamp()}
+	d := time.Duration(monitor.seconds) * time.Second
+	doEvery(d, GetContent, monitor,change)
+}
