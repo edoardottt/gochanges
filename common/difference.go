@@ -2,15 +2,10 @@
 ADD LICENSE
  */
 
-package main
+package common
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"net/http"
 )
 
-func main() {
-
-}
