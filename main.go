@@ -17,13 +17,17 @@ package main
 
 import (
 	"fmt"
+	"github.com/edoardottt/gochanges/scraper"
 )
 
 func main() {
-	users,websites := ReadInput("example/example1.txt")
-	fmt.Println(users,websites)
+	users,websites, monitors := ReadInput("example/example1.txt")
 	//CONNECT MONGO
 	//INSERT ALL DATA IN MONGO
-	//PREPARE MONITOR
-	//START MONITORING
+	for _,monitor := range monitors {
+		go scraper.StartMonitoring()
+	}
+	var e int
+
+	fmt.Scanf("%d", &e)
 }

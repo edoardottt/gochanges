@@ -23,10 +23,12 @@ import (
 	"net/mail"
 	"net/url"
 	"os"
+	"strconv"
+	"strings"
 )
 
 // TODO
-func ReadInput(filename string) ([]db.User,[]db.Website) {
+func ReadInput(filename string) ([]db.User,[]db.Website,[]scraper.Monitor) {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
@@ -35,18 +37,29 @@ func ReadInput(filename string) ([]db.User,[]db.Website) {
 
 	var users []db.User
 	var websites []db.Website
+	var monitors []scraper.Monitor
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		address := scanner.Text()
-		if IsEmail(address) {
+		if IsEmail(address) && len(strings.Fields(address))== 1 {
 			users = append(users,db.User{Email: address})
 		}else {
-			if IsWebsite(address) {
-				websites = append(websites,db.Website{
-					Address: address,
+			if IsWebsite(address) && len(strings.Fields(address)) == 2 {
+				fields := strings.Fields(address)
+				website := db.Website{
+					Address: fields[0],
 					Body: scraper.GetContent(address),
 					Timestamp: scraper.GetCurrentTimestamp(),
+				}
+				websites = append(websites, website)
+				seconds,err := strconv.Atoi(fields[1])
+				if err != nil {
+					log.Fatal(err)
+				}
+				monitors = append(monitors, scraper.Monitor{
+					Website: website,
+					Seconds: seconds,
 				})
 			}
 		}
@@ -55,7 +68,7 @@ func ReadInput(filename string) ([]db.User,[]db.Website) {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-	return users,websites
+	return users,websites,monitors
 }
 
 // TODO

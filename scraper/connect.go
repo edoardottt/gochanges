@@ -80,3 +80,4 @@ func StartMonitoring(monitor Monitor, database *mongo.Database) {
 	emails := db.GetAllEmails(database)
 	doEvery(d, database, GetContent, monitor,emails)
 }
+
