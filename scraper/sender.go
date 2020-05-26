@@ -13,7 +13,7 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 
 */
 
-package main
+package scraper
 
 import (
 	"github.com/edoardottt/gochanges/db"
@@ -21,6 +21,7 @@ import (
 	"net/smtp"
 )
 
+// TODO
 func SendEmail(emails []*db.User) {
 	// Choose auth method and set it up
 	auth := smtp.PlainAuth("", "piotr@mailtrap.io", "extremely_secret_pass", "smtp.mailtrap.io")
