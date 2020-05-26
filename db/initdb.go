@@ -24,7 +24,7 @@ import (
 )
 
 // TODO
-func ConnectDB(connectionString string,databaseName string) *mongo.Client {
+func ConnectDB(connectionString string) *mongo.Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
 	if err != nil {
 		log.Fatal(err)

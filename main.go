@@ -17,17 +17,24 @@ package main
 
 import (
 	"fmt"
-	"github.com/edoardottt/gochanges/scraper"
+	//"github.com/edoardottt/gochanges/scraper"
+	"github.com/edoardottt/gochanges/db"
 )
 
 func main() {
-	users,websites, monitors := ReadInput("example/example1.txt")
-	//CONNECT MONGO
+	fileName := "example/example1.txt"
+	connString := "mongodb://127.0.0.1:27017"
+	users,websites, monitors := ReadInput(fileName)
+	client := db.ConnectDB(connString)
+	fmt.Println(users)
+	fmt.Println(websites)
+	fmt.Println(monitors)
+	fmt.Println(client)
 	//INSERT ALL DATA IN MONGO
-	for _,monitor := range monitors {
-		go scraper.StartMonitoring()
-	}
-	var e int
+	//for _,monitor := range monitors {
+		//go scraper.StartMonitoring()
+	//}
 
+	var e int
 	fmt.Scanf("%d", &e)
 }
