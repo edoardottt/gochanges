@@ -24,7 +24,7 @@ import (
 )
 
 // TODO
-func ConnectDB(connectionString string,databaseName string) *mongo.Database {
+func ConnectDB(connectionString string,databaseName string) *mongo.Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
 	if err != nil {
 		log.Fatal(err)
@@ -41,10 +41,7 @@ func ConnectDB(connectionString string,databaseName string) *mongo.Database {
 	}
 	fmt.Println("Connected to MongoDB!")
 	defer client.Disconnect(ctx)
-
-	database := client.Database(databaseName)
-
-	return database
+	return client
 }
 
 // TODO

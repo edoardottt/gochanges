@@ -17,7 +17,6 @@ package scraper
 import (
 	"fmt"
 	"github.com/edoardottt/gochanges/db"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"io/ioutil"
 	"log"
@@ -64,11 +63,7 @@ func AddMonitor(address string, interval int) Monitor {
 }
 
 // TODO
-func AddUser(email string) db.User {
-	verified,err := VerifiedEmail(email)
-	if !verified {
-		log.Fatal(err)
-	}
+func CreateUser(email string) db.User {
 	return db.User{Email: email}
 }
 
@@ -111,8 +106,4 @@ func doEvery(d time.Duration, database *mongo.Database, f func(u string) string,
 func StartMonitoring(monitor Monitor, database *mongo.Database) {
 	d := time.Duration(monitor.Seconds) * time.Second
 	doEvery(d, database, GetContent, monitor)
-}
-
-func VerifiedEmail(email string) (bool,error) {
-	return true,nil
 }

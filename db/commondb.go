@@ -42,11 +42,6 @@ func GetDatabase(client *mongo.Client, databaseName string) *mongo.Database {
 }
 
 // TODO
-func IsWebsitePresent(client *mongo.Client, website string) (bool,error) {
-	return true,nil
-}
-
-// TODO
 func GetUsers(database *mongo.Database) *mongo.Collection {
 	return database.Collection("users")
 }

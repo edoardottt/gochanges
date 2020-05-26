@@ -16,6 +16,8 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 package main
 
 func main() {
-	ReadInput()
-
+	//users,websites := ReadInput()
+	//INSERT ALL DATA IN MONGO
+	//PREPARE MONITOR
+	//START MONITORING
 }
