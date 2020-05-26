@@ -74,7 +74,7 @@ func InsertUser(database *mongo.Database, user User) {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Inserted a single document: ", insertResult.InsertedID)
+	fmt.Println("Inserted a single user: ", insertResult.InsertedID)
 }
 
 // TODO
@@ -85,5 +85,5 @@ func InsertWebsite(database *mongo.Database, website Website) {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Inserted a single document: ", insertResult.InsertedID)
+	fmt.Println("Inserted a single website: ", insertResult.InsertedID)
 }

@@ -62,7 +62,7 @@ func ReadInput(filename string) ([]db.User,[]db.Website) {
 func IsEmail(address string) bool {
 	_, err := mail.ParseAddress(address)
 	if err != nil {
-		log.Fatal(err)
+		return false
 	}
 	return true
 }
@@ -71,7 +71,7 @@ func IsEmail(address string) bool {
 func IsWebsite(address string) bool {
 	_, err := url.ParseRequestURI(address)
 	if err != nil {
-		log.Fatal(err)
+		return false
 	}
 	return true
 }

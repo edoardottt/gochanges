@@ -21,7 +21,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 	"time"
 )
 
@@ -40,31 +39,8 @@ func (Monitor) HealthCheck(u string) bool {
 }
 
 // TODO
-func ParseUrl(urlPath string)  (url.URL,error) {
-	u, err := url.Parse(urlPath)
-	if err != nil {
-		return url.URL{},err
-	}
-	fmt.Println(*u)			//DEBUG
-	return *u,nil
-}
-
-// TODO
-func AddMonitor(address string, interval int) Monitor {
-	monitor := Monitor{}
-	_, err := ParseUrl(address)
-	if err != nil {
-		log.Fatal(err)
-	}
-	body := GetContent(address)
-	monitor.Website = db.Website{Address: address, Body: body ,Timestamp: GetCurrentTimestamp()}
-	monitor.Seconds = interval
-	return monitor
-}
-
-// TODO
-func CreateUser(email string) db.User {
-	return db.User{Email: email}
+func CreateMonitor(website db.Website, interval int) Monitor {
+	return Monitor{Website: website, Seconds: interval}
 }
 
 // TODO
@@ -83,27 +59,24 @@ func GetContent(u string) string {
 }
 
 // TODO
-func doEvery(d time.Duration, database *mongo.Database, f func(u string) string, monitor Monitor) {
+func doEvery(d time.Duration, database *mongo.Database, f func(u string) string, monitor Monitor,emails []*db.User) {
 	for _ = range time.Tick(d) {
 		content := f(monitor.Website.Address)
 		newTimestamp := GetCurrentTimestamp()
 		edited := Edited(monitor.Website.Body, content)
 		if edited {
-			// TODO
 			fmt.Println("edited")
 			monitor.Website.Body = content
 			monitor.Website.Timestamp = newTimestamp
 			db.InsertWebsite(database, monitor.Website)
-			emails := db.GetAllEmails(database)
 			SendEmail(emails)
 		}
-		fmt.Println(newTimestamp)
-		fmt.Println(content)
 	}
 }
 
 // TODO
 func StartMonitoring(monitor Monitor, database *mongo.Database) {
 	d := time.Duration(monitor.Seconds) * time.Second
-	doEvery(d, database, GetContent, monitor)
+	emails := db.GetAllEmails(database)
+	doEvery(d, database, GetContent, monitor,emails)
 }

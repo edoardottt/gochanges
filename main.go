@@ -15,8 +15,13 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 
 package main
 
+import (
+	"fmt"
+)
+
 func main() {
-	//users,websites := ReadInput()
+	users,websites := ReadInput("example/example1.txt")
+	fmt.Println(users,websites)
 	//CONNECT MONGO
 	//INSERT ALL DATA IN MONGO
 	//PREPARE MONITOR
