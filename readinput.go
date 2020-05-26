@@ -17,7 +17,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"github.com/edoardottt/gochanges/db"
 	"github.com/edoardottt/gochanges/scraper"
 	"log"
@@ -34,8 +33,8 @@ func ReadInput(filename string) ([]db.User,[]db.Website) {
 	}
 	defer file.Close()
 
-	var users []db.User{}
-	var websites []db.Website{}
+	var users []db.User
+	var websites []db.Website
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {

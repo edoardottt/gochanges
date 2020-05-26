@@ -17,6 +17,7 @@ package main
 
 func main() {
 	//users,websites := ReadInput()
+	//CONNECT MONGO
 	//INSERT ALL DATA IN MONGO
 	//PREPARE MONITOR
 	//START MONITORING
