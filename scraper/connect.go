@@ -16,6 +16,7 @@ package scraper
 
 import (
 	"fmt"
+	"github.com/edoardottt/gochanges/db"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -24,8 +25,8 @@ import (
 )
 
 type Monitor struct {
-	website 	string
-	seconds 	int
+	Website 	db.Website
+	Seconds 	int
 }
 
 // TODO
@@ -54,9 +55,17 @@ func AddMonitor(address string, interval int) Monitor {
 	if err != nil {
 		log.Fatal(err)
 	}
-	monitor.website = address
-	monitor.seconds = interval
+	body := GetContent(address)
+	monitor.Website = db.Website{Address: address, Body: body ,Timestamp: GetCurrentTimestamp()}
+	monitor.Seconds = interval
 	return monitor
+}
+
+// TODO
+func AddUser(email string) db.User {
+	if VerifiedEmail(email) {
+		return db.User{email}
+	}
 }
 
 // TODO
@@ -75,14 +84,17 @@ func GetContent(u string) string {
 }
 
 // TODO
-func doEvery(d time.Duration, f func(u string) string, monitor Monitor, change Change) {
+func doEvery(d time.Duration, f func(u string) string, monitor Monitor) {
 	for _ = range time.Tick(d) {
-		content := f(monitor.website)
+		content := f(monitor.Website.Address)
 		newTimestamp := GetCurrentTimestamp()
-		edited := Edited(change, content)
+		edited := Edited(monitor.Website.Body, content)
 		if edited {
 			// TODO
 			fmt.Println("edited")
+			//add website change in mongodb
+			//update website struct and add in Monitor
+			//email user
 		}
 		fmt.Println(newTimestamp)
 		fmt.Println(content)
@@ -91,8 +103,10 @@ func doEvery(d time.Duration, f func(u string) string, monitor Monitor, change C
 
 // TODO
 func StartMonitoring(monitor Monitor) {
-	change := Change{monitor: monitor, timestamp: GetCurrentTimestamp()}
-	d := time.Duration(monitor.seconds) * time.Second
-	doEvery(d, GetContent, monitor,change)
+	d := time.Duration(monitor.Seconds) * time.Second
+	doEvery(d, GetContent, monitor)
 }
 
+func VerifiedEmail(email string) bool {
+	return true
+}

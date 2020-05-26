@@ -21,11 +21,24 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"net/mail"
 	"time"
 )
 
 // TODO
-func ConnectDB(connectionString string) {
+type Website struct {
+	Address 	string
+	Body 		string
+	Timestamp 	int64
+}
+
+// TODO
+type User struct {
+	Email		string
+}
+
+// TODO
+func ConnectDB(connectionString string) *mongo.Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
 	if err != nil {
 		log.Fatal(err)
@@ -37,6 +50,7 @@ func ConnectDB(connectionString string) {
 	}
 	defer client.Disconnect(ctx)
 
+	return client
 	//quickstartDatabase := client.Database("quickstart")
 	//podcastsCollection := quickstartDatabase.Collection("podcasts")
 	//episodesCollection := quickstartDatabase.Collection("episodes")
@@ -44,16 +58,16 @@ func ConnectDB(connectionString string) {
 
 
 // TODO
-func InsertWebsite(address string) (bool, error) {
+func InsertWebsite(client *mongo.Client, website string) (bool, error) {
 
 }
 
 // TODO
-func InsertChange(address string) (bool,error) {
+func InsertChange(client *mongo.Client, website string) (bool,error) {
 
 }
 
 // TODO
-func IsWebsitePresent(address string) (bool,error) {
+func IsWebsitePresent(client *mongo.Client, website string) (bool,error) {
 
 }

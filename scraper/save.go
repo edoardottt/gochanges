@@ -18,15 +18,3 @@ import (
 	"time"
 	"github.com/edoardottt/gochanges/db"
 )
-
-type Document struct {
-	address 	string
-	body		string
-	differences	int64
-	time		time.Time
-}
-
-// TODO
-func InsertFirstDocument(address string) Change {
-	return Change{}
-}
