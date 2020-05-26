@@ -95,3 +95,4 @@ func StartMonitoring(monitor Monitor) {
 	d := time.Duration(monitor.seconds) * time.Second
 	doEvery(d, GetContent, monitor,change)
 }
+

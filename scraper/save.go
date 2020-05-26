@@ -15,12 +15,18 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 package scraper
 
 import (
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"time"
+	"github.com/edoardottt/gochanges/db"
 )
 
+type Document struct {
+	address 	string
+	body		string
+	differences	int64
+	time		time.Time
+}
+
 // TODO
-func ConnectDB(connectionString string) (*mongo.Client, error) {
-	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
-	return client,err
+func InsertFirstDocument(address string) Change {
+	return Change{}
 }
