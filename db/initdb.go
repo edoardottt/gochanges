@@ -16,6 +16,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -33,10 +34,59 @@ func ConnectDB(connectionString string,databaseName string) *mongo.Database {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Check the connection
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Connected to MongoDB!")
 	defer client.Disconnect(ctx)
+
 	database := client.Database(databaseName)
 
 	return database
-	//podcastsCollection := quickstartDatabase.Collection("podcasts")
-	//episodesCollection := quickstartDatabase.Collection("episodes")
+}
+
+// TODO
+func InsertUsers(database *mongo.Database, users []User) {
+	collection := GetUsers(database)
+	usersInt := []interface{}{users}
+	insertManyResult, err := collection.InsertMany(context.TODO(), usersInt)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Inserted multiple users: ", insertManyResult.InsertedIDs)
+}
+
+// TODO
+func InsertWebsites(database *mongo.Database, websites []Website) {
+	collection := GetWebsites(database)
+	websitesInt := []interface{}{websites}
+	insertManyResult, err := collection.InsertMany(context.TODO(), websitesInt)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Inserted multiple websites: ", insertManyResult.InsertedIDs)
+}
+
+// TODO
+func InsertUser(database *mongo.Database, user User) {
+	collection := GetUsers(database)
+	insertResult, err := collection.InsertOne(context.TODO(), user)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Inserted a single document: ", insertResult.InsertedID)
+}
+
+// TODO
+func InsertWebsite(database *mongo.Database, website Website) {
+	collection := GetWebsites(database)
+	insertResult, err := collection.InsertOne(context.TODO(), website)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Inserted a single document: ", insertResult.InsertedID)
 }

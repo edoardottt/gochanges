@@ -17,6 +17,8 @@ package scraper
 import (
 	"fmt"
 	"github.com/edoardottt/gochanges/db"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -86,7 +88,7 @@ func GetContent(u string) string {
 }
 
 // TODO
-func doEvery(d time.Duration, f func(u string) string, monitor Monitor) {
+func doEvery(d time.Duration, database *mongo.Database, f func(u string) string, monitor Monitor) {
 	for _ = range time.Tick(d) {
 		content := f(monitor.Website.Address)
 		newTimestamp := GetCurrentTimestamp()
@@ -94,9 +96,11 @@ func doEvery(d time.Duration, f func(u string) string, monitor Monitor) {
 		if edited {
 			// TODO
 			fmt.Println("edited")
-			//add website change in mongodb
-			//update website struct and add in Monitor
-			//email user
+			monitor.Website.Body = content
+			monitor.Website.Timestamp = newTimestamp
+			db.InsertWebsite(database, monitor.Website)
+			emails := db.GetAllEmails(database)
+			SendEmail(emails)
 		}
 		fmt.Println(newTimestamp)
 		fmt.Println(content)
@@ -104,9 +108,9 @@ func doEvery(d time.Duration, f func(u string) string, monitor Monitor) {
 }
 
 // TODO
-func StartMonitoring(monitor Monitor) {
+func StartMonitoring(monitor Monitor, database *mongo.Database) {
 	d := time.Duration(monitor.Seconds) * time.Second
-	doEvery(d, GetContent, monitor)
+	doEvery(d, database, GetContent, monitor)
 }
 
 func VerifiedEmail(email string) (bool,error) {
