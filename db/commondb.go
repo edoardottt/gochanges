@@ -37,25 +37,6 @@ type User struct {
 	Email		string
 }
 
-// TODO
-func ConnectDB(connectionString string) *mongo.Client {
-	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer client.Disconnect(ctx)
-
-	return client
-	//quickstartDatabase := client.Database("quickstart")
-	//podcastsCollection := quickstartDatabase.Collection("podcasts")
-	//episodesCollection := quickstartDatabase.Collection("episodes")
-}
-
 
 // TODO
 func InsertWebsite(client *mongo.Client, website string) (bool, error) {

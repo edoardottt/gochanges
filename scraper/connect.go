@@ -63,9 +63,11 @@ func AddMonitor(address string, interval int) Monitor {
 
 // TODO
 func AddUser(email string) db.User {
-	if VerifiedEmail(email) {
-		return db.User{email}
+	verified,err := VerifiedEmail(email)
+	if !verified {
+		log.Fatal(err)
 	}
+	return db.User{Email: email}
 }
 
 // TODO
@@ -107,6 +109,6 @@ func StartMonitoring(monitor Monitor) {
 	doEvery(d, GetContent, monitor)
 }
 
-func VerifiedEmail(email string) bool {
-	return true
+func VerifiedEmail(email string) (bool,error) {
+	return true,nil
 }

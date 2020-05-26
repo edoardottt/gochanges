@@ -13,3 +13,30 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 */
 
 package db
+
+import (
+	"context"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"log"
+	"time"
+)
+
+// TODO
+func ConnectDB(connectionString string,databaseName string) *mongo.Database {
+	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = client.Connect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Disconnect(ctx)
+	database := client.Database(databaseName)
+
+	return database
+	//podcastsCollection := quickstartDatabase.Collection("podcasts")
+	//episodesCollection := quickstartDatabase.Collection("episodes")
+}
