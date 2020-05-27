@@ -19,12 +19,19 @@ import (
 	"fmt"
 	"github.com/edoardottt/gochanges/db"
 	"github.com/edoardottt/gochanges/scraper"
+	"os"
 )
 
 func main() {
-	fileName := "example/example1.txt"
-	connString := "mongodb://127.0.0.1:27017"
-	dbName := "gochangesdb"
+	fileName := os.Getenv("FILE_NAME")
+	//fileName := "example/example1.txt"
+
+	connString := os.Getenv("MONGO_CONN")
+	//connString := "mongodb://127.0.0.1:27017"
+
+	dbName := os.Getenv("DB_NAME")
+	//dbName := "gochangesdb"
+
 	users, websites, monitors := ReadInput(fileName)
 	//INSERT ALL DATA IN MONGO
 	db.InsertUsers(connString, dbName, users)
