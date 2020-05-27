@@ -18,8 +18,6 @@ package main
 import (
 	"fmt"
 	"github.com/edoardottt/gochanges/scraper"
-
-	//"github.com/edoardottt/gochanges/scraper"
 	"github.com/edoardottt/gochanges/db"
 )
 

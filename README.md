@@ -21,4 +21,19 @@
   <a href="https://github.com/edoardottt/gochanges/blob/master/LICENSE">
     <img src="https://github.com/edoardottt/gochanges/blob/master/images/licenseBadge.svg" alt="License" />
   </a>
+
+  <br>
+  Built with<br>
+  <!-- docker logo-->
+  <a href="https://docker.com">
+    <img src="https://github.com/edoardottt/gochanges/blob/master/images/docker-logo.png" alt="docker-logo" />
+  </a>
+  <!-- go logo-->
+  <a href="https://golang.org">
+    <img src="https://github.com/edoardottt/gochanges/blob/master/images/go-logo.png" alt="go-logo" />
+  </a>
+  <!-- mongodb logo-->
+  <a href="https://mongodb.com">
+    <img src="https://github.com/edoardottt/gochanges/blob/master/images/mongodb-logo.png" alt="mongodb-logo" />
+  </a>
 </p>

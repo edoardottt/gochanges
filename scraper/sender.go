@@ -15,8 +15,10 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 
 package scraper
 
+import "fmt"
+
 // TODO
 func SendEmail(emails []string) {
-
+	fmt.Println("EDITED")
 }
 
