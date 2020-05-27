@@ -12,7 +12,3 @@ services:
   gochanges:
     restart: always
     build: .
-    environment:
-      - FILE_NAME="./example/example1.txt"
-      - MONGO_CONN="mongodb://127.0.0.1:27017"
-      - DB_NAME="gochangesdb"

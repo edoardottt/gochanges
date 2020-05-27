@@ -43,7 +43,9 @@ func main() {
 		go scraper.StartMonitoring(monitor, emails, connString, dbName)
 	}
 
-	fmt.Println("Press ENTER to terminate...")
-	var e int
-	fmt.Scanf("%d", &e)
+	fmt.Println("Press CTRL+C to terminate...")
+	var e string
+	for e != "q" {
+		fmt.Scanf("%d", &e)
+	}
 }

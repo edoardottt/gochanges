@@ -3,7 +3,7 @@ FROM golang:latest
 
 # Add env vars
 ENV FILE_NAME="example/example1.txt"
-ENV MONGO_CONN="mongodb://127.0.0.1:27017"
+ENV MONGO_CONN="mongodb://172.17.0.1:27017"
 ENV DB_NAME="gochangesdb"
 
 
