@@ -18,12 +18,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+//Website
 type Website struct {
 	Address   string `json:"address Str"`
 	Body      string `json:"body Str"`
 	Timestamp int64  `json:"timestamp Int"`
 }
 
+//User
 type User struct {
 	Email string `json:"email Str"`
 }

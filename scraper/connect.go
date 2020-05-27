@@ -22,12 +22,13 @@ import (
 	"time"
 )
 
+//Monitor
 type Monitor struct {
 	Website db.Website
 	Seconds int
 }
 
-//HeathCheck tell us if a website is up & running
+//HealthCheck tell us if a website is up & running
 func (Monitor) HealthCheck(u string) bool {
 	res, err := http.Get(u)
 	if err != nil {
