@@ -36,3 +36,4 @@ func SendEmail(emails []string) {
 		log.Fatal(err)
 	}
 }
+

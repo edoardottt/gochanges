@@ -15,7 +15,6 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 package scraper
 
 import (
-	"fmt"
 	"github.com/edoardottt/gochanges/db"
 	"io/ioutil"
 	"log"
@@ -63,7 +62,6 @@ func doEvery(d time.Duration, f func(u string) string, monitor Monitor,emails []
 		newTimestamp := GetCurrentTimestamp()
 		edited := Edited(monitor.Website.Body, content)
 		if edited {
-			fmt.Println("edited")
 			monitor.Website.Body = content
 			monitor.Website.Timestamp = newTimestamp
 			db.InsertWebsite(connString,dbName, monitor.Website)
