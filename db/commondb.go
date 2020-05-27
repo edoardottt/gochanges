@@ -15,23 +15,19 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 package db
 
 import (
-	"context"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"log"
 )
 
 // TODO
 type Website struct {
-	Address 	string
-	Body 		string
-	Timestamp 	int64
+	Address 	string `json:"address Str"`
+	Body 		string `json:"body Str"`
+	Timestamp 	int64  `json:"timestamp Int"`
 }
 
 // TODO
 type User struct {
-	Email		string
+	Email	string `json:"email Str"`
 }
 
 // TODO
@@ -52,44 +48,10 @@ func GetWebsites(database *mongo.Database) *mongo.Collection {
 }
 
 // TODO
-func GetAllEmails(database *mongo.Database) []*User {
-	collection := GetUsers(database)
-
-	// Pass these options to the Find method
-	findOptions := options.Find()
-
-	// Here's an array in which you can store the decoded documents
-	var results []*User
-
-	// Passing bson.D{{}} as the filter matches all documents in the collection
-	cur, err := collection.Find(context.TODO(), bson.D{{}}, findOptions)
-	if err != nil {
-		log.Fatal(err)
+func GetAllEmails(users []User) []string {
+	var results []string
+	for _,value := range users {
+		results = append(results,value.Email)
 	}
-
-	// Finding multiple documents returns a cursor
-	// Iterating through the cursor allows us to decode documents one at a time
-	for cur.Next(context.TODO()) {
-
-		// create a value into which the single document can be decoded
-		var elem User
-		err := cur.Decode(&elem)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		results = append(results, &elem)
-	}
-
-	if err := cur.Err(); err != nil {
-		log.Fatal(err)
-	}
-
-	// Close the cursor once finished
-	err = cur.Close(context.TODO())
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	return results
 }
