@@ -42,6 +42,7 @@
 
 **To Do:**
 
+- [ ] Tests
 - [ ] Add comment
 - [x] Storing data into MongoDB
 - [ ] Dockerfile
