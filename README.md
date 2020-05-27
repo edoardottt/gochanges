@@ -55,6 +55,8 @@ Usage
 6. Type in your terminal `docker-compose up`
 7. Enjoy!
 
+
+**Tested on my lightweight laptop, correctly monitors over 500 websites**
 <hr>
 
 **To Do:**
@@ -65,4 +67,5 @@ Usage
 - [x] docker-compose.yml
 - [ ] Tests
 - [ ] Mount ext volume
+- [ ] Use only a client to store all changes 
 - [ ] Send mail using OAuth2.0
