@@ -11,28 +11,28 @@ the complete source code of the modified version must be made available.
 
 Edoardo Ottavianelli, https://edoardoottavianelli.it
 
- */
+*/
 
 package main
 
 import (
 	"fmt"
-	"github.com/edoardottt/gochanges/scraper"
 	"github.com/edoardottt/gochanges/db"
+	"github.com/edoardottt/gochanges/scraper"
 )
 
 func main() {
 	fileName := "example/example1.txt"
 	connString := "mongodb://127.0.0.1:27017"
 	dbName := "gochangesdb"
-	users,websites, monitors := ReadInput(fileName)
+	users, websites, monitors := ReadInput(fileName)
 	//INSERT ALL DATA IN MONGO
-	db.InsertUsers(connString,dbName,users)
-	db.InsertWebsites(connString,dbName,websites)
+	db.InsertUsers(connString, dbName, users)
+	db.InsertWebsites(connString, dbName, websites)
 	emails := db.GetAllEmails(users)
 
 	fmt.Println(emails)
-	for _,monitor := range monitors {
+	for _, monitor := range monitors {
 		go scraper.StartMonitoring(monitor, emails, connString, dbName)
 	}
 

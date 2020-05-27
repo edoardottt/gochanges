@@ -20,14 +20,14 @@ import (
 
 // TODO
 type Website struct {
-	Address 	string `json:"address Str"`
-	Body 		string `json:"body Str"`
-	Timestamp 	int64  `json:"timestamp Int"`
+	Address   string `json:"address Str"`
+	Body      string `json:"body Str"`
+	Timestamp int64  `json:"timestamp Int"`
 }
 
 // TODO
 type User struct {
-	Email	string `json:"email Str"`
+	Email string `json:"email Str"`
 }
 
 // TODO
@@ -50,8 +50,8 @@ func GetWebsites(database *mongo.Database) *mongo.Collection {
 // TODO
 func GetAllEmails(users []User) []string {
 	var results []string
-	for _,value := range users {
-		results = append(results,value.Email)
+	for _, value := range users {
+		results = append(results, value.Email)
 	}
 	return results
 }

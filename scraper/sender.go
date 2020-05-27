@@ -21,4 +21,3 @@ import "fmt"
 func SendEmail(emails []string) {
 	fmt.Println("EDITED")
 }
-

@@ -10,7 +10,7 @@ When a modified version is used to provide a service over a network,
 the complete source code of the modified version must be made available.
 
 Edoardo Ottavianelli, https://edoardoottavianelli.it
- */
+*/
 
 package scraper
 
@@ -23,8 +23,8 @@ import (
 )
 
 type Monitor struct {
-	Website 	db.Website
-	Seconds 	int
+	Website db.Website
+	Seconds int
 }
 
 // TODO
@@ -56,7 +56,7 @@ func GetContent(u string) string {
 }
 
 // TODO
-func doEvery(d time.Duration, f func(u string) string, monitor Monitor,emails []string, connString string, dbName string) {
+func doEvery(d time.Duration, f func(u string) string, monitor Monitor, emails []string, connString string, dbName string) {
 	for _ = range time.Tick(d) {
 		content := f(monitor.Website.Address)
 		newTimestamp := GetCurrentTimestamp()
@@ -64,15 +64,14 @@ func doEvery(d time.Duration, f func(u string) string, monitor Monitor,emails []
 		if edited {
 			monitor.Website.Body = content
 			monitor.Website.Timestamp = newTimestamp
-			db.InsertWebsite(connString,dbName, monitor.Website)
+			db.InsertWebsite(connString, dbName, monitor.Website)
 			SendEmail(emails)
 		}
 	}
 }
 
 // TODO
-func StartMonitoring(monitor Monitor,emails []string, connString string, dbName string) {
+func StartMonitoring(monitor Monitor, emails []string, connString string, dbName string) {
 	d := time.Duration(monitor.Seconds) * time.Second
-	doEvery(d, GetContent, monitor,emails, connString, dbName)
+	doEvery(d, GetContent, monitor, emails, connString, dbName)
 }
-
