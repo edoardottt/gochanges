@@ -22,7 +22,7 @@
     <img src="https://github.com/edoardottt/gochanges/blob/master/images/licenseBadge.svg" alt="License" />
   </a>
 
-  <br><br>
+  <br>
   Built with<br>
   <!-- docker logo-->
   <a href="https://docker.com">
