@@ -45,6 +45,6 @@
 - [ ] Tests
 - [ ] Add comment
 - [x] Storing data into MongoDB
-- [ ] Dockerfile
-- [ ] docker-compose.yml
+- [x] Dockerfile
+- [x] docker-compose.yml
 - [ ] Send mail using OAuth2.0
