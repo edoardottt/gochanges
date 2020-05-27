@@ -23,7 +23,7 @@
   </a>
 
   <br><br>
-  <b>Built with<b><br>
+  Built with<br>
   <!-- docker logo-->
   <a href="https://docker.com">
     <img widht="48" height="48" src="https://github.com/edoardottt/gochanges/blob/master/images/docker-logo.png" alt="docker-logo" />
