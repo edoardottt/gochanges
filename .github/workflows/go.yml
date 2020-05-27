@@ -35,8 +35,3 @@ jobs:
 
     - name: Test
       run: go test -v .
-    - name: DockerBuild
-      uses: docker/build-action@v1
-      with:
-        repository: edoardottt/gochanges
-        tags: 1.0
