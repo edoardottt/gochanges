@@ -37,3 +37,11 @@
     <img widht="48" height="48" src="https://github.com/edoardottt/gochanges/blob/master/images/mongodb-logo.png" alt="mongodb-logo" />
   </a>
 </p>
+
+<hr>
+**ToDo:**
+- [ ] Add comment
+- [x] Storing data into MongoDB
+- [ ] Dockerfile
+- [ ] docker-compose.yml
+- [ ] Send mail using OAuth2.0
