@@ -41,7 +41,8 @@
 Requirements
 ----------
 
-docker, docker-compose
+- docker
+- docker-compose
 
 Usage
 -------
