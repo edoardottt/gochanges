@@ -43,7 +43,7 @@
 
   <br>
   <!-- Say thanks -->
-  <a href="https://edoardoottavianelli.it">
+  <a href="https://saythanks.io/to/edoardott%40gmail.com">
     <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg" alt="say thanks" />
   </a>
     <!-- Open-source-love -->
