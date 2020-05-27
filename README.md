@@ -59,9 +59,10 @@ Usage
 
 **To Do:**
 
-- [ ] Tests
 - [x] Add comments
 - [x] Storing data into MongoDB
 - [x] Dockerfile
 - [x] docker-compose.yml
+- [ ] Tests
+- [ ] Mount ext volume
 - [ ] Send mail using OAuth2.0
