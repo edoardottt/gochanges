@@ -27,7 +27,7 @@ type Monitor struct {
 	Seconds int
 }
 
-// TODO
+//HeathCheck tell us if a website is up & running
 func (Monitor) HealthCheck(u string) bool {
 	res, err := http.Get(u)
 	if err != nil {
@@ -36,12 +36,12 @@ func (Monitor) HealthCheck(u string) bool {
 	return res.StatusCode == 200
 }
 
-// TODO
+//CreateMonitor create an instance of Monitor
 func CreateMonitor(website db.Website, interval int) Monitor {
 	return Monitor{Website: website, Seconds: interval}
 }
 
-// TODO
+//GetContent returns the content of a website
 func GetContent(u string) string {
 	res, err := http.Get(u)
 	if err != nil {
@@ -55,7 +55,12 @@ func GetContent(u string) string {
 	return string(body)
 }
 
-// TODO
+//doEvery checks regularly every n seconds (input)
+//the content of the website w.
+//If the content is changed:
+//1. Update the website struct locally
+//2. Insert the website changed in mongoDB
+//3. Notify all the users
 func doEvery(d time.Duration, f func(u string) string, monitor Monitor, emails []string, connString string, dbName string) {
 	for _ = range time.Tick(d) {
 		content := f(monitor.Website.Address)
@@ -70,7 +75,8 @@ func doEvery(d time.Duration, f func(u string) string, monitor Monitor, emails [
 	}
 }
 
-// TODO
+//StartMonitoring prepare the interval between
+//two requests and start monitoring the website w(input).
 func StartMonitoring(monitor Monitor, emails []string, connString string, dbName string) {
 	d := time.Duration(monitor.Seconds) * time.Second
 	doEvery(d, GetContent, monitor, emails, connString, dbName)

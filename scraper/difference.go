@@ -18,12 +18,13 @@ import (
 	"time"
 )
 
-// TODO
+//GetCurrentTimestamp returns milliseconds
+//from 1 Jan 1970
 func GetCurrentTimestamp() int64 {
 	return time.Now().Unix()
 }
 
-// TODO
+//Edited tell us if a content of a website is changed
 func Edited(body string, content string) bool {
 	return body != content
 }

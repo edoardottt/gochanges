@@ -27,7 +27,12 @@ import (
 	"strings"
 )
 
-// TODO
+//ReadInput reads from a file
+//the emails, websites and their interval time.
+//Emails will be used as destinations where sends notifications.
+//Website urls have their corresponding interval (integer)
+//that is the seconds between two requests.
+//Returns also a slice of Monitors, object used for scraping.
 func ReadInput(filename string) ([]db.User, []db.Website, []scraper.Monitor) {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -71,7 +76,8 @@ func ReadInput(filename string) ([]db.User, []db.Website, []scraper.Monitor) {
 	return users, websites, monitors
 }
 
-// TODO
+//IsEmail tell us if a string is an email or not.
+//format: <user@mail.com>
 func IsEmail(address string) bool {
 	_, err := mail.ParseAddress(address)
 	if err != nil {
@@ -80,7 +86,8 @@ func IsEmail(address string) bool {
 	return true
 }
 
-// TODO
+//IsWebsite tell us if a string is a website url or not.
+//format: https://www.edoardoottavianelli.it/
 func IsWebsite(address string) bool {
 	_, err := url.ParseRequestURI(address)
 	if err != nil {

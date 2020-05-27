@@ -18,36 +18,34 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// TODO
 type Website struct {
 	Address   string `json:"address Str"`
 	Body      string `json:"body Str"`
 	Timestamp int64  `json:"timestamp Int"`
 }
 
-// TODO
 type User struct {
 	Email string `json:"email Str"`
 }
 
-// TODO
+//GetDatabase returns the pointer to the database d(input).
 func GetDatabase(client *mongo.Client, databaseName string) *mongo.Database {
 	database := client.Database(databaseName)
 
 	return database
 }
 
-// TODO
+//GetUsers returns the collection of users
 func GetUsers(database *mongo.Database) *mongo.Collection {
 	return database.Collection("users")
 }
 
-// TODO
+//GetWebsites returns the collection of wesbites
 func GetWebsites(database *mongo.Database) *mongo.Collection {
 	return database.Collection("websites")
 }
 
-// TODO
+//GetAllEmails returns all the emails entered
 func GetAllEmails(users []User) []string {
 	var results []string
 	for _, value := range users {

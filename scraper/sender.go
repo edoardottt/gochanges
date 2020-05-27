@@ -17,7 +17,9 @@ package scraper
 
 import "fmt"
 
-// TODO
+//SendEmail now prints only EDITED.
+//In a future feature I would like
+//to use OAuth2 to send email (gmail)
 func SendEmail(emails []string) {
 	fmt.Println("EDITED")
 }
