@@ -90,7 +90,7 @@ Usage
 7. Enjoy!
 
 
-**Tested on my lightweight laptop, correctly monitors over 500 websites**
+**Tested on my lightweight laptop, correctly monitors over 150 websites**
 <hr>
 
 **To Do:**
