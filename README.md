@@ -39,7 +39,8 @@
 </p>
 
 <hr>
-**ToDo:**
+
+**To Do:**
 
 - [ ] Add comment
 - [x] Storing data into MongoDB
