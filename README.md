@@ -43,7 +43,7 @@
 **To Do:**
 
 - [ ] Tests
-- [ ] Add comment
+- [x] Add comments
 - [x] Storing data into MongoDB
 - [x] Dockerfile
 - [x] docker-compose.yml
