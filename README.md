@@ -91,6 +91,7 @@ Usage
 6. Type in your terminal `docker-compose up`
 7. Enjoy!
 
+Common errors here : [COMMON ERRORS](https://github.com/edoardottt/gochanges/blob/master/COMMON_ERRORS.md)
 
 Contributing
 -------
