@@ -95,7 +95,7 @@ Usage
 Contributing
 -------
 
-Just open an issue/pull request. See also [CODE OF CONDUCT](https://github.com/edoardottt/gochanges/blob/master/CODE_OF_CONDUCT.md)
+Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/edoardottt/gochanges/blob/master/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/edoardottt/gochanges/blob/master/CODE_OF_CONDUCT.md)
 
 **To Do:**
 
