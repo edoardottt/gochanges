@@ -77,6 +77,8 @@ Requirements
 - docker
 - docker-compose
 
+**Tested on my lightweight laptop, correctly monitors over 150 websites**
+
 Usage
 -------
 
@@ -95,7 +97,6 @@ Contributing
 
 Just open an issue. See also 
 
-**Tested on my lightweight laptop, correctly monitors over 150 websites**
 <hr>
 
 **To Do:**
