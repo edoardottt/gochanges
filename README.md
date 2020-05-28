@@ -90,6 +90,11 @@ Usage
 7. Enjoy!
 
 
+Contributing
+-------
+
+Just open an issue. See also 
+
 **Tested on my lightweight laptop, correctly monitors over 150 websites**
 <hr>
 
