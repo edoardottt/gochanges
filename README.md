@@ -95,9 +95,7 @@ Usage
 Contributing
 -------
 
-Just open an issue. See also 
-
-<hr>
+Just open an issue/pull request. See also [CODE OF CONDUCT](https://github.com/edoardottt/gochanges/blob/master/CODE_OF_CONDUCT.md)
 
 **To Do:**
 
@@ -109,3 +107,13 @@ Just open an issue. See also
 - [ ] Mount ext volume
 - [ ] Use only a client to store all changes 
 - [ ] Send mail using OAuth2.0
+
+--------------------------
+If you liked it drop a :star:
+--------------------------
+
+https://www.edoardoottavianelli.it for contact me.
+
+
+  
+                                                                            Edoardo Ottavianelli ©
