@@ -81,7 +81,7 @@ Usage
 -------
 
 1. Download this repo
-2. Open a terminal and type `sudo ip addr show docker0`. Find the url of the network.
+2. Open a terminal and type `docker info && sudo ip addr show docker0`. Find the url of the network.
   You can see mine works on 172.17.0.1
 3. Based on you connection url, edit the environment variable MONGO_CONN (Dockerfile file)
 4. Create (or edit example/example1.txt file) a file that tells the app the emails (receivers) 
