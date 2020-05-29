@@ -106,8 +106,8 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] docker-compose.yml
 - [x] Default interval (5 min)
 - [x] Common errors
+- [x] Mount external volume
 - [ ] Tests
-- [ ] Mount external volume
 - [ ] Use only a client to store all changes 
 - [ ] Send mail using OAuth2.0
 

@@ -6,6 +6,8 @@ services:
   mongo:
     image: 'mongo:latest'
     container_name: 'mongo'
+    volumes:
+      - /mongo-volume:/data/db
     ports:
       - '27017:27017'
 
