@@ -23,6 +23,7 @@ import (
 	"net/mail"
 	"net/url"
 	"os"
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -47,13 +48,32 @@ func ReadInput(filename string) ([]db.User, []db.Website, []scraper.Monitor) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		address := scanner.Text()
-		if IsEmail(address) && len(strings.Fields(address)) == 1 {
-			users = append(users, db.User{Email: address[1 : len(address)-1]})
-		} else {
-			if IsWebsite(address) && len(strings.Fields(address)) == 2 {
-				fields := strings.Fields(address)
+		// if only one field in a row, default time = 5 min
+		if len(strings.Fields(address)) == 1 {
+			if IsEmail(address) {
+				users = append(users, db.User{Email: address[1 : len(address)-1]})
+			} else {
+				if IsWebsite(address) {
+					website := db.Website{
+						Address:   address,
+						Body:      scraper.GetContent(address),
+						Timestamp: scraper.GetCurrentTimestamp(),
+					}
+					websites = append(websites, website)
+					if err != nil {
+						log.Fatal(err)
+					}
+					monitors = append(monitors, scraper.Monitor{
+						Website: website,
+						Seconds: 300,
+					})
+				}
+			}
+		} else if len(strings.Fields(address)) == 2 { //otherwise, check also the second input on the row
+			fields := strings.Fields(address)
+			if IsWebsite(fields[0]) {
 				website := db.Website{
-					Address:   fields[0],
+					Address:   address,
 					Body:      scraper.GetContent(fields[0]),
 					Timestamp: scraper.GetCurrentTimestamp(),
 				}
@@ -67,6 +87,9 @@ func ReadInput(filename string) ([]db.User, []db.Website, []scraper.Monitor) {
 					Seconds: seconds,
 				})
 			}
+		} else {
+			err = errors.New("Bad input.")
+			log.Fatal(err)
 		}
 	}
 
