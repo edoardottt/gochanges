@@ -104,10 +104,10 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Storing data into MongoDB
 - [x] Dockerfile
 - [x] docker-compose.yml
-- [ ] Default interval (5 min)
-- [ ] Common errors
+- [x] Default interval (5 min)
+- [x] Common errors
 - [ ] Tests
-- [ ] Mount ext volume
+- [ ] Mount external volume
 - [ ] Use only a client to store all changes 
 - [ ] Send mail using OAuth2.0
 
