@@ -108,7 +108,8 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Common errors
 - [x] Mount external volume
 - [ ] Tests
-- [ ] Use only a client to store all changes 
+- [ ] Use only a client to store all changes
+- [ ] Read input by command line 
 - [ ] Send mail using OAuth2.0
 
 --------------------------
