@@ -71,7 +71,7 @@
   </a>
 </p>
 
-Requirements
+Requirements 🔍
 ----------
 
 - docker
@@ -79,7 +79,7 @@ Requirements
 
 **Tested on my lightweight laptop, correctly monitors over 150 websites**
 
-Usage
+Get Started 🎉
 -------
 
 1. Download this repo
@@ -93,7 +93,7 @@ Usage
 
 Common errors here : [COMMON ERRORS](https://github.com/edoardottt/gochanges/blob/master/COMMON_ERRORS.md)
 
-Contributing
+Contributing 🛠
 -------
 
 Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/edoardottt/gochanges/blob/master/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/edoardottt/gochanges/blob/master/CODE_OF_CONDUCT.md)
