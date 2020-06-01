@@ -42,9 +42,11 @@ func main() {
 	var input string
 	for {
 		fmt.Println("-------------------------------------")
-		reader := bufio.NewReader(os.Stdin)
-		fmt.Print("Enter input: ")
-		input, _ = reader.ReadString('\n')
+		fmt.Println("Enter input: ")
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input = scanner.Text()
+		fmt.Println(input)
 		inputtedType, user, website := ReadInput(input)
 		//Insert data in mongoDB
 		if inputtedType == "user" {
