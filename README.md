@@ -2,7 +2,7 @@
 <p align="center">
   <!-- logo -->
   <img src="https://github.com/edoardottt/gochanges/blob/master/images/gochanges.png">
-  <b>Fast, scalable website changes tracker</b><br>
+  <b>Fast, scalable, easy to use website changes tracker</b><br>
   <sub>
     Coded with 💙 by edoardottt.
   </sub>
