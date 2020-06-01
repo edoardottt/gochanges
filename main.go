@@ -40,7 +40,8 @@ func main() {
 	fmt.Println("Insert input.")
 	fmt.Println("Press CTRL+C to terminate...")
 	var input string
-	for input != "q" {
+	for {
+		fmt.Println("-------------------------------------")
 		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Enter input: ")
 		input, _ = reader.ReadString('\n')
@@ -54,5 +55,6 @@ func main() {
 		} else if inputtedType=="error" {
 			fmt.Println("bad input")
 		}
+		fmt.Println("-------------------------------------")
 	}
 }

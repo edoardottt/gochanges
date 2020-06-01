@@ -21,7 +21,6 @@ import (
 	"log"
 	"net/mail"
 	"net/url"
-	"errors"
 	"strconv"
 	"strings"
 )
@@ -65,9 +64,6 @@ func ReadInput(address string) (string, db.User, db.Website) {
 			}
 			return "website",db.User{},website
 		}
-	} else {
-		err := errors.New("bad input")
-		log.Fatal(err)
 	}
 	return "error",db.User{},db.Website{}
 }
