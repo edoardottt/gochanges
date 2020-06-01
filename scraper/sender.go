@@ -20,6 +20,9 @@ import "fmt"
 //SendEmail now prints only EDITED.
 //In a future feature I would like
 //to use OAuth2 to send email (gmail)
-func SendEmail(emails []string) {
+func SendEmail() {
+	// TODO
+	// retrieve all emails from users
+	// and send emails
 	fmt.Println("EDITED")
 }

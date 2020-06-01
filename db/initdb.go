@@ -23,6 +23,20 @@ import (
 	"time"
 )
 
+//Website
+type Website struct {
+	Address		string	`json:"address Str"`
+	Body      	string	`json:"body Str"`
+	Seconds		int		`json:"seconds Int"`
+	Timestamp 	int64 	`json:"timestamp Int"`
+}
+
+//User
+type User struct {
+	Email string `json:"email Str"`
+}
+
+
 //ConnectDB creates and returns a client connected by a
 //connection string to mongoDB.
 //Also checks the connection if everything is ok.
@@ -31,7 +45,7 @@ func ConnectDB(connectionString string) (*mongo.Client, context.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	err = client.Connect(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -43,67 +57,4 @@ func ConnectDB(connectionString string) (*mongo.Client, context.Context) {
 	}
 	fmt.Println("Connected to MongoDB!") //DEBUG
 	return client, ctx
-}
-
-//InsertUsers inserts into the collection users
-//in database d(input) a slice of users inputted.
-func InsertUsers(connString string, dbName string, users []User) {
-	client, ctx := ConnectDB(connString)
-	database := GetDatabase(client, dbName)
-	collection := GetUsers(database)
-	usersInt := make([]interface{}, len(users))
-	for i := range users {
-		usersInt[i] = users[i]
-	}
-	insertManyResult, err := collection.InsertMany(context.TODO(), usersInt)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Inserted multiple users: ", insertManyResult.InsertedIDs)
-	client.Disconnect(ctx)
-}
-
-//InsertWebsites inserts into the collection websites
-//in database d(input) a slice of websites inputted.
-func InsertWebsites(connString string, dbName string, websites []Website) {
-	client, ctx := ConnectDB(connString)
-	database := GetDatabase(client, dbName)
-	collection := GetWebsites(database)
-	websitesInt := make([]interface{}, len(websites))
-	for i := range websites {
-		websitesInt[i] = websites[i]
-	}
-	insertManyResult, err := collection.InsertMany(context.TODO(), websitesInt)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Inserted multiple websites: ", insertManyResult.InsertedIDs)
-	client.Disconnect(ctx)
-}
-
-//InsertUser inserts an user into the collection users
-func InsertUser(connString string, dbName string, user User) {
-	client, ctx := ConnectDB(connString)
-	database := GetDatabase(client, dbName)
-	collection := GetUsers(database)
-	insertResult, err := collection.InsertOne(context.TODO(), user)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Inserted a single user: ", insertResult.InsertedID)
-	client.Disconnect(ctx)
-}
-
-//InsertWebsite inserts a website url into the collection websites
-func InsertWebsite(connString string, dbName string, website Website) {
-	client, ctx := ConnectDB(connString)
-	database := GetDatabase(client, dbName)
-	collection := GetWebsites(database)
-	insertResult, err := collection.InsertOne(context.TODO(), website)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Inserted a single website: ", insertResult.InsertedID)
-	client.Disconnect(ctx)
 }

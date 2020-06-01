@@ -22,26 +22,6 @@ import (
 	"time"
 )
 
-//Monitor
-type Monitor struct {
-	Website db.Website
-	Seconds int
-}
-
-//HealthCheck tell us if a website is up & running
-func (Monitor) HealthCheck(u string) bool {
-	res, err := http.Get(u)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return res.StatusCode == 200
-}
-
-//CreateMonitor create an instance of Monitor
-func CreateMonitor(website db.Website, interval int) Monitor {
-	return Monitor{Website: website, Seconds: interval}
-}
-
 //GetContent returns the content of a website
 func GetContent(u string) string {
 	res, err := http.Get(u)
@@ -62,23 +42,23 @@ func GetContent(u string) string {
 //1. Update the website struct locally
 //2. Insert the website changed in mongoDB
 //3. Notify all the users
-func doEvery(d time.Duration, f func(u string) string, monitor Monitor, emails []string, connString string, dbName string) {
+func doEvery(d time.Duration, f func(u string) string, website db.Website, connString string, dbName string) {
 	for _ = range time.Tick(d) {
-		content := f(monitor.Website.Address)
+		content := f(website.Address)
 		newTimestamp := GetCurrentTimestamp()
-		edited := Edited(monitor.Website.Body, content)
+		edited := Edited(website.Body, content)
 		if edited {
-			monitor.Website.Body = content
-			monitor.Website.Timestamp = newTimestamp
-			db.InsertWebsite(connString, dbName, monitor.Website)
-			SendEmail(emails)
+			website.Body = content
+			website.Timestamp = newTimestamp
+			db.InsertWebsite(connString, dbName, website)
+			SendEmail()
 		}
 	}
 }
 
 //StartMonitoring prepare the interval between
 //two requests and start monitoring the website w(input).
-func StartMonitoring(monitor Monitor, emails []string, connString string, dbName string) {
-	d := time.Duration(monitor.Seconds) * time.Second
-	doEvery(d, GetContent, monitor, emails, connString, dbName)
+func StartMonitoring(website db.Website, connString string, dbName string) {
+	d := time.Duration(website.Seconds) * time.Second
+	doEvery(d, GetContent, website, connString, dbName)
 }

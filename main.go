@@ -16,6 +16,7 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/edoardottt/gochanges/db"
 	"github.com/edoardottt/gochanges/scraper"
@@ -23,29 +24,35 @@ import (
 )
 
 func main() {
-	fileName := os.Getenv("FILE_NAME")
-	//fileName := "example/example1.txt"
-
 	connString := os.Getenv("MONGO_CONN")
-	//connString := "mongodb://127.0.0.1:27017"
+	//connString := "mongodb://hostname:27017"
 
 	dbName := os.Getenv("DB_NAME")
 	//dbName := "gochangesdb"
 
-	users, websites, monitors := ReadInput(fileName)
-	//INSERT ALL DATA IN MONGO
-	db.InsertUsers(connString, dbName, users)
-	db.InsertWebsites(connString, dbName, websites)
-	emails := db.GetAllEmails(users)
-
-	fmt.Println(emails)
-	for _, monitor := range monitors {
-		go scraper.StartMonitoring(monitor, emails, connString, dbName)
+	// Take all websites into mongodb
+	// Start monitoring all websites yet present
+	websites := db.GetAllWebsites(connString, dbName)
+	for _, website := range websites {
+		go scraper.StartMonitoring(website, connString, dbName)
 	}
-
+	// Scan input and monitor it
+	fmt.Println("Insert input.")
 	fmt.Println("Press CTRL+C to terminate...")
-	var e string
-	for e != "q" {
-		fmt.Scanf("%d", &e)
+	var input string
+	for input != "q" {
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Print("Enter input: ")
+		input, _ = reader.ReadString('\n')
+		inputtedType, user, website := ReadInput(input)
+		//Insert data in mongoDB
+		if inputtedType=="user" {
+			db.InsertUser(connString, dbName, user)
+		} else if inputtedType=="website" {
+			db.InsertWebsite(connString, dbName, website)
+			go scraper.StartMonitoring(website, connString, dbName)
+		} else if inputtedType=="error" {
+			fmt.Println("bad input")
+		}
 	}
 }

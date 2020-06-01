@@ -86,10 +86,8 @@ Get Started 🎉
 2. Open a terminal and type `docker info && sudo ip addr show docker0`. Find the url of the network.
   You can see mine works on `172.17.0.1`
 3. Based on you connection url, edit the environment variable `MONGO_CONN` (Dockerfile file)
-4. Create (or edit example/example1.txt file) a file that tells the app the emails (receivers) 
-  and which websites have to monitor and edit the env. var. `FILE_NAME`
-6. Type in your terminal `docker-compose up`
-7. Enjoy!
+4. Type in your terminal `docker-compose up`
+5. Enjoy!
 
 Common errors here : [COMMON ERRORS](https://github.com/edoardottt/gochanges/blob/master/COMMON_ERRORS.md)
 
@@ -107,9 +105,9 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Default interval (5 min)
 - [x] Common errors
 - [x] Mount external volume
+- [ ] Read input by command line
 - [ ] Tests
-- [ ] Use only a client to store all changes
-- [ ] Read input by command line 
+- [ ] Use only a client to store all changes 
 - [ ] Send mail using OAuth2.0
 
 --------------------------
