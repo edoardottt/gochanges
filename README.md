@@ -86,7 +86,7 @@ Get Started 🎉
 2. Open a terminal and type `docker info && sudo ip addr show docker0`. Find the url of the network.
   You can see mine works on `172.17.0.1`
 3. Based on you connection url, edit the environment variable `MONGO_CONN` (Dockerfile file)
-4. Type in your terminal `docker-compose up`
+4. Type in your terminal `make up`
 5. Enjoy!
 
 Common errors here : [COMMON ERRORS](https://github.com/edoardottt/gochanges/blob/master/COMMON_ERRORS.md)
