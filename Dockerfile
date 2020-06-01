@@ -23,3 +23,5 @@ COPY . .
 
 # Run the Go app
 CMD ["go","run","."]
+
+EXPOSE 8080

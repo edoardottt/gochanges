@@ -16,10 +16,12 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"github.com/edoardottt/gochanges/db"
 	"github.com/edoardottt/gochanges/scraper"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"os"
 )
 
@@ -37,26 +39,29 @@ func main() {
 		go scraper.StartMonitoring(website, connString, dbName)
 	}
 	// Scan input and monitor it
-	fmt.Println("Insert input.")
-	fmt.Println("Press CTRL+C to terminate...")
-	var input string
-	for {
-		fmt.Println("-------------------------------------")
-		fmt.Println("Enter input: ")
-		scanner := bufio.NewScanner(os.Stdin)
-		scanner.Scan()
-		input = scanner.Text()
-		fmt.Println(input)
-		inputtedType, user, website := ReadInput(input)
-		//Insert data in mongoDB
-		if inputtedType == "user" {
-			db.InsertUser(connString, dbName, user)
-		} else if inputtedType == "website" {
-			db.InsertWebsite(connString, dbName, website)
-			go scraper.StartMonitoring(website, connString, dbName)
-		} else if inputtedType == "error" {
-			fmt.Println("bad input")
-		}
-		fmt.Println("-------------------------------------")
+	http.HandleFunc("/", handlerHome)
+	http.HandleFunc("/save/", handlerSave)
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+// TODO
+func handlerHome(w http.ResponseWriter, r *http.Request) {
+	page, _ := loadPage("fe/home.html")
+	fmt.Fprintf(w, "%s", page)
+}
+
+// TODO
+func handlerSave(w http.ResponseWriter, r *http.Request) {
+	body := r.FormValue("body")
+	fmt.Println(body)
+	fmt.Fprintf(w, "%s", body)
+}
+
+// TODO
+func loadPage(filename string) (string, error) {
+	body, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return "", err
 	}
+	return string(body), nil
 }

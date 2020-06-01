@@ -14,3 +14,5 @@ services:
   gochanges:
     restart: always
     build: .
+    ports:
+     - "8080:8080"
