@@ -36,17 +36,17 @@ func ReadInput(address string) (string, db.User, db.Website) {
 	// if only one field in a row, default time = 5 min
 	if len(strings.Fields(address)) == 1 {
 		if IsEmail(address) {
-			return "user",db.User{Email: address[1 : len(address)-1]},db.Website{}
+			return "user", db.User{Email: address[1 : len(address)-1]}, db.Website{}
 
 		} else {
 			if IsWebsite(address) {
 				website := db.Website{
-					Address:   	address,
-					Body:      	scraper.GetContent(address),
-					Seconds:	300,
-					Timestamp: 	scraper.GetCurrentTimestamp(),
+					Address:   address,
+					Body:      scraper.GetContent(address),
+					Seconds:   300,
+					Timestamp: scraper.GetCurrentTimestamp(),
 				}
-				return "website",db.User{},website
+				return "website", db.User{}, website
 			}
 		}
 	} else if len(strings.Fields(address)) == 2 { //otherwise, check also the second input on the row
@@ -57,15 +57,15 @@ func ReadInput(address string) (string, db.User, db.Website) {
 				log.Fatal(err)
 			}
 			website := db.Website{
-				Address:   	address,
-				Body:      	scraper.GetContent(fields[0]),
-				Seconds:	seconds,
-				Timestamp: 	scraper.GetCurrentTimestamp(),
+				Address:   address,
+				Body:      scraper.GetContent(fields[0]),
+				Seconds:   seconds,
+				Timestamp: scraper.GetCurrentTimestamp(),
 			}
-			return "website",db.User{},website
+			return "website", db.User{}, website
 		}
 	}
-	return "error",db.User{},db.Website{}
+	return "error", db.User{}, db.Website{}
 }
 
 //IsEmail tell us if a string is an email or not.

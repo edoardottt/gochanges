@@ -25,17 +25,16 @@ import (
 
 //Website
 type Website struct {
-	Address		string	`json:"address Str"`
-	Body      	string	`json:"body Str"`
-	Seconds		int		`json:"seconds Int"`
-	Timestamp 	int64 	`json:"timestamp Int"`
+	Address   string `json:"address Str"`
+	Body      string `json:"body Str"`
+	Seconds   int    `json:"seconds Int"`
+	Timestamp int64  `json:"timestamp Int"`
 }
 
 //User
 type User struct {
 	Email string `json:"email Str"`
 }
-
 
 //ConnectDB creates and returns a client connected by a
 //connection string to mongoDB.

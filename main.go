@@ -47,12 +47,12 @@ func main() {
 		input, _ = reader.ReadString('\n')
 		inputtedType, user, website := ReadInput(input)
 		//Insert data in mongoDB
-		if inputtedType=="user" {
+		if inputtedType == "user" {
 			db.InsertUser(connString, dbName, user)
-		} else if inputtedType=="website" {
+		} else if inputtedType == "website" {
 			db.InsertWebsite(connString, dbName, website)
 			go scraper.StartMonitoring(website, connString, dbName)
-		} else if inputtedType=="error" {
+		} else if inputtedType == "error" {
 			fmt.Println("bad input")
 		}
 		fmt.Println("-------------------------------------")
