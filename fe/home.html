@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>gochanges | Home</title>
-	<link rel = "stylesheet" type = "text/css" href = "style.css" />
-</head>
-<body>
-	<img class="center" src="../images/gochanges.png">
-	<h1>Editing</h1>
-        <form action="/save/" method="POST">
-        <textarea name="body"></textarea><br>
-        <input type="submit" value="Save">
-    </form>
-</body>
+	<head>
+		<title>gochanges | Home</title>
+		<link rel = "stylesheet" type = "text/css" href = "style.css" />
+	</head>
+	<body>
+		<img class="center" src="../images/gochanges.png">
+		
+		<!--FIRST ROW-->
+		<div class="row">
+			<!--ADD EMAIL-->
+			<div class="column">
+				<div class="center">
+					<h1>Add emails</h1>
+				    <form action="/save/" method="POST">
+				        <textarea name="body"></textarea>
+				        <input type="submit" value="Add">
+				    </form>
+				</div>
+			</div>
+			<!--ADD WEBSITE-->
+			<div class="column">
+				<div class="center">
+					<h1>Add websites</h1>
+			        <form action="/save/" method="POST">
+			        	<textarea name="body"></textarea>
+			        	<input type="submit" value="Add">
+			    	</form>
+			    </div>
+			</div>
+		</div>
+
+		<!--SECOND ROW-->
+		<div class="center">
+			<br> 
+			<h2 class="center">Tracked websites</h2>
+			
+		</div>
+
+	</body>
 </html>
