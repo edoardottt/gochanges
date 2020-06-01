@@ -105,7 +105,7 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Default interval (5 min)
 - [x] Common errors
 - [x] Mount external volume
-- [ ] Read input by command line
+- [ ] Read input by localhost:xxxx
 - [ ] Tests
 - [ ] Use only a client to store all changes 
 - [ ] Send mail using OAuth2.0
