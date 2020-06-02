@@ -37,25 +37,16 @@
 		border-collapse: collapse;
 		border-spacing: 0;
 	}
-
-	body {
-		-webkit-text-size-adjust: none;
-	}
-
 	
 /* Grid */
 
 	.row {
 		border-bottom: solid 1px transparent;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 	}
 
 	.row > * {
 		float: left;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 	}
 
@@ -67,10 +58,6 @@
 	}
 
 /* Basic */
-
-	body {
-		-ms-overflow-style: scrollbar;
-	}
 
 	@media screen and (max-width: 480px) {
 
@@ -84,14 +71,6 @@
 		background: #fff;
 	}
 
-		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
-			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			transition: none !important;
-		}
 
 /* Type */
 
@@ -101,7 +80,7 @@
 	}
 
 	body, input, select, textarea {
-		font-family: "Raleway", Arial, Helvetica, sans-serif;
+		font-family: Arial, Helvetica, sans-serif;
 		font-size: 14pt;
 		font-weight: 300;
 		letter-spacing: 0.09em;
@@ -203,15 +182,14 @@
 	code {
 		border-radius: 0;
 		border: solid 1px;
-		font-family: "Courier New", monospace;
+		font-family: monospace;
 		font-size: 0.9em;
 		margin: 0 0.25em;
 		padding: 0.25em 0.65em;
 	}
 
 	pre {
-		-webkit-overflow-scrolling: touch;
-		font-family: "Courier New", monospace;
+		font-family: monospace;
 		font-size: 0.9em;
 		margin: 0 0 2em 0;
 	}
@@ -482,14 +460,8 @@
 /* Feature */
 
 	.features {
-		display: -moz-flex;
-		display: -webkit-flex;
-		display: -ms-flex;
 		display: flex;
-		-webkit-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		-webkit-justify-content: center;
 		justify-content: center;
 		margin-bottom: 2em;
 	}
