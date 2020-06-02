@@ -52,9 +52,15 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 
 // TODO
 func handlerSave(w http.ResponseWriter, r *http.Request) {
-	body := r.FormValue("body")
-	fmt.Println(body)
-	fmt.Fprintf(w, "%s", body)
+	email := r.FormValue("email")
+	telegram := r.FormValue("telegram")
+	website := r.FormValue("website")
+	interval := r.FormValue("interval")
+	fmt.Println(email)
+	fmt.Println(telegram)
+	fmt.Println(website)
+	fmt.Println(interval)
+	fmt.Fprintf(w, "%s %s %s %s", email,telegram, website, interval)
 }
 
 // TODO

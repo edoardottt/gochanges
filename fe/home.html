@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
 		<title>gochanges | Home</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/fe/style.css">
 	</head>
 	<body>
 
 		<!-- Banner -->
 			<section id="banner">
-				<img id="center" src="../images/gochanges.png">
+				<img id="center" src="/images/gochanges.png" alt="gochanges">
 				<p>Fast, scalable, easy to use website change tracker</p>
 				<ul class="actions">
 					<li><a href="#get-started" class="button special">Get started</a></li>
@@ -27,8 +27,8 @@
 					<div class="feature">
 						<form class="grid-form" method="post" action="#">
 							<div class="form-control narrow">
-								<label for="email">Telegram</label>
-								<input name="telegram" id="telegram" type="email">
+								<label for="telegram">Telegram</label>
+								<input name="telegram" id="telegram" type="text">
 							</div>
 							<ul class="actions">
 								<li><input value="Add Telegram" type="submit"></li>
@@ -51,8 +51,10 @@
 					<div class="feature">
 						<form class="grid-form" method="post" action="#">
 							<div class="form-control narrow">
-								<label for="email">Website</label>
-								<input name="website" id="website" type="email">
+								<label for="website">Website</label>
+								<input name="website" id="website" type="text">
+								<label for="interval">Interval (sec)</label>
+								<input name="interval" id="interval" type="number">
 							</div>
 							<ul class="actions">
 								<li><input value="Add Website" type="submit"></li>
