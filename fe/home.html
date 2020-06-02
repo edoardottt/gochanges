@@ -1,42 +1,93 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>gochanges | Home</title>
-		<link rel = "stylesheet" type = "text/css" href = "style.css" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<img class="center" src="../images/gochanges.png">
-		
-		<!--FIRST ROW-->
-		<div class="row">
-			<!--ADD EMAIL-->
-			<div class="column">
-				<div class="center">
-					<h1>Add emails</h1>
-				    <form action="/save/" method="POST">
-				        <textarea name="body"></textarea>
-				        <input type="submit" value="Add">
-				    </form>
-				</div>
-			</div>
-			<!--ADD WEBSITE-->
-			<div class="column">
-				<div class="center">
-					<h1>Add websites</h1>
-			        <form action="/save/" method="POST">
-			        	<textarea name="body"></textarea>
-			        	<input type="submit" value="Add">
-			    	</form>
-			    </div>
-			</div>
-		</div>
 
-		<!--SECOND ROW-->
-		<div class="center">
-			<br> 
-			<h2 class="center">Tracked websites</h2>
-			
-		</div>
+		<!-- Banner -->
+			<section id="banner">
+				<img id="center" src="../images/gochanges.png">
+				<p>Fast, scalable, easy to use website change tracker</p>
+				<ul class="actions">
+					<li><a href="#get-started" class="button special">Get started</a></li>
+				</ul>
+			</section>
+
+		<!-- Section One -->
+			<section id="one" class="wrapper special">
+				<div class="inner">
+					<header class="major">
+						<h2 id="get-started">GET STARTED</h2>
+					</header>
+					<!--TELEGRAM-->
+						<div class="feature">
+							<i class="fa fa-paper-plane-o"></i>
+							<form class="grid-form" method="post" action="#">
+								<div class="form-control narrow">
+									<label for="email">Telegram</label>
+									<input name="telegram" id="telegram" type="email">
+								</div>
+								<ul class="actions">
+									<li><input value="Add Telegram" type="submit"></li>
+								</ul>
+							</form>
+						</div>
+						<!--EMAIL-->
+						<div class="feature">
+							<i class="fa fa-envelope-o"></i>
+							<form class="grid-form" method="post" action="#">
+								<div class="form-control narrow">
+									<label for="email">Email</label>
+									<input name="email" id="email" type="email">
+								</div>
+								<ul class="actions">
+									<li><input value="Add Email" type="submit"></li>
+								</ul>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<!-- Section Two -->
+			<section id="two" class="wrapper style2 special">
+				<div class="inner narrow">
+					<header>
+						<h2>Get in touch</h2>
+					</header>
+					<form class="grid-form" method="post" action="#">
+						<div class="form-control narrow">
+							<label for="name">Name</label>
+							<input name="name" id="name" type="text">
+						</div>
+						<div class="form-control narrow">
+							<label for="email">Email</label>
+							<input name="email" id="email" type="email">
+						</div>
+						<div class="form-control">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="4"></textarea>
+						</div>
+						<ul class="actions">
+							<li><input value="Send Message" type="submit"></li>
+						</ul>
+					</form>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					<a href="https://github.com/edoardottt/gochanges">gochanges on github</a>
+					<a href="https://templated.co/typify">Typify on templated.co</a>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
 
 	</body>
 </html>
