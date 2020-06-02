@@ -109,6 +109,7 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [ ] Good frontend
 - [ ] Tests
 - [ ] Use only a client to store all changes 
+- [ ] Integrate Telegram-botAPI
 - [ ] Send mail using OAuth2.0
 
 --------------------------
