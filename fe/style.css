@@ -1,7 +1,6 @@
-@import url(font-awesome.min.css);
 @import url("http://fonts.googleapis.com/css?family=Raleway:300,700");
 
-.center {
+#center {
 	display: block;
   	margin-left: auto;
   	margin-right: auto;
