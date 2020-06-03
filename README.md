@@ -106,9 +106,9 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Common errors
 - [x] Mount external volume
 - [ ] Read input by localhost:xxxx
-- [ ] Good frontend
+- [ ] Understandable frontend
+- [ ] Data in frontend (emails, telegram tokens and websites tracked)
 - [ ] Tests
-- [ ] Use only a client to store all changes 
 - [ ] Integrate Telegram-botAPI
 - [ ] Send mail using OAuth2.0
 
