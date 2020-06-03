@@ -45,7 +45,7 @@ func handlerSave(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(telegram)
 	fmt.Println(website)
 	fmt.Println(interval)
-	fmt.Fprintf(w, "%s %s %s %s", email,telegram, website, interval)
+	fmt.Fprintf(w, "%s %s %s %s", email, telegram, website, interval)
 }
 
 // TODO
