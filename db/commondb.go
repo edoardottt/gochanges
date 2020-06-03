@@ -34,7 +34,7 @@ func GetUsers(database *mongo.Database) *mongo.Collection {
 	return database.Collection("users")
 }
 
-//GetWebsites returns the collection of wesbites
+//GetWebsites returns the collection of websites
 func GetWebsites(database *mongo.Database) *mongo.Collection {
 	return database.Collection("websites")
 }
