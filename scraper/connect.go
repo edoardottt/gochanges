@@ -43,7 +43,7 @@ func GetContent(u string) string {
 //2. Insert the website changed in mongoDB
 //3. Notify all the users
 func doEvery(d time.Duration, f func(u string) string, website db.Website, connString string, dbName string) {
-	for _ = range time.Tick(d) {
+	for range time.Tick(d) {
 		content := f(website.Address)
 		newTimestamp := GetCurrentTimestamp()
 		edited := Edited(website.Body, content)
