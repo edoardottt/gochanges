@@ -15,8 +15,6 @@ Edoardo Ottavianelli, https://edoardoottavianelli.it
 
 package webserver
 
-
-
 // TODO
 func checkEmail(email string) bool {
 	return true
