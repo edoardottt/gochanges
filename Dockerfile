@@ -21,7 +21,10 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
+#Build gochanges go file
+RUN go build
+
 # Run the Go app
-CMD ["go","run","."]
+CMD ["./gochanges"]
 
 EXPOSE 8080

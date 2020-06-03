@@ -1,0 +1,12 @@
+# ignore .git and .cache folders
+.git
+.cache
+
+# ignore all markdown files
+*.md
+
+# ignore unuseful images 
+images/docker-logo.png
+images/golang-logo.png
+images/licenseBadge.svg
+images/mongodb-logo.png
