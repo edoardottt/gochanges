@@ -108,6 +108,7 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [ ] Read input by localhost:xxxx
 - [ ] Understandable frontend
 - [ ] Data in frontend (emails, telegram tokens and websites tracked)
+- [ ] Dynamic Home Page
 - [ ] Tests
 - [ ] Integrate Telegram-botAPI
 - [ ] Send mail using OAuth2.0
