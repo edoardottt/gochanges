@@ -19,15 +19,14 @@ import (
 	"github.com/edoardottt/gochanges/db"
 	"github.com/edoardottt/gochanges/scraper"
 	"github.com/edoardottt/gochanges/webserver"
-	"os"
 )
 
 func main() {
-	connString := os.Getenv("MONGO_CONN")
-	//connString := "mongodb://hostname:27017"
+	//connString := os.Getenv("MONGO_CONN")
+	connString := "mongodb://localhost:27017"
 
-	dbName := os.Getenv("DB_NAME")
-	//dbName := "gochangesdb"
+	//dbName := os.Getenv("DB_NAME")
+	dbName := "gochangesdb"
 
 	// Take all websites into mongodb
 	// Start monitoring all websites yet present
