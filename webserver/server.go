@@ -35,12 +35,14 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 
 	setContentType(w, r)
 
-	page := ""
-	if r.RequestURI == "/" {
-		page, _ = loadPage("fe/home.html")
+	URI := r.RequestURI
+	if URI == "/" {
+		URI = "./fe/home.html"
 	} else {
-		page, _ = loadPage("." + r.RequestURI)
+		URI = "." + URI
 	}
+
+	page, _ := loadPage(URI)
 
 	fmt.Fprintf(w, "%s", page)
 }
