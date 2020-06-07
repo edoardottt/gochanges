@@ -20,6 +20,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 )
 
 // TODO
@@ -31,7 +32,18 @@ func StartListen() {
 
 // TODO
 func handlerHome(w http.ResponseWriter, r *http.Request) {
-	page, _ := loadPage("fe/home.html")
+
+	setContentType(w, r)
+
+	URI := r.RequestURI
+	if URI == "/" {
+		URI = "./fe/home.html"
+	} else {
+		URI = "." + URI
+	}
+
+	page, _ := loadPage(URI)
+
 	fmt.Fprintf(w, "%s", page)
 }
 
@@ -55,4 +67,21 @@ func loadPage(filename string) (string, error) {
 		return "", err
 	}
 	return string(body), nil
+}
+
+func setContentType(w http.ResponseWriter, r *http.Request) {
+
+	path := r.URL.Path
+	contentType := "text/html"
+
+	if strings.HasSuffix(path, ".css") {
+		contentType = "text/css"
+	} else if strings.HasSuffix(path, ".js") {
+		contentType = "application/javascript"
+	} else if strings.HasSuffix(path, ".png") {
+		contentType = "image/png"
+	}
+
+	w.Header().Set("Content-Type", contentType)
+
 }
