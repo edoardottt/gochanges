@@ -50,6 +50,7 @@ func checkWebsite(website string) (bool, error) {
 
 //checkTelegram checks if the telegram inputted is a valid telegram token.
 func checkTelegram(telegram string) bool {
+	//Check how we will take the telegram input
 	return true
 }
 
@@ -59,5 +60,6 @@ func checkInterval(interval string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
+	//max 1 day of interval
 	return 1 <= i && i <= 86400, nil
 }

@@ -105,8 +105,9 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Default interval (5 min)
 - [x] Common errors
 - [x] Mount external volume
-- [ ] Read input by localhost:xxxx
+- [x] Read input by localhost:xxxx
 - [ ] Understandable frontend
+- [ ] Move to hmtl template
 - [ ] Data in frontend (emails, telegram tokens and websites tracked)
 - [ ] Dynamic Home Page
 - [ ] Tests
