@@ -28,7 +28,7 @@
 						<form class="grid-form" method="post" action="/save/">
 							<div class="form-control">
 								<label for="telegram">Telegram</label>
-								<input name="telegram" id="telegram" type="text">
+								<input name="telegram" required="true" id="telegram" type="text">
 							</div>
 							<ul class="actions">
 								<li><input value="Add Telegram" type="submit"></li>
@@ -40,7 +40,7 @@
 						<form class="grid-form" method="post" action="/save/">
 							<div class="form-control">
 								<label for="email">Email</label>
-								<input name="email" id="email" type="email">
+								<input name="email" required="true" id="email" type="email">
 							</div>
 							<ul class="actions">
 								<li><input value="Add Email" type="submit"></li>
@@ -52,9 +52,9 @@
 						<form class="grid-form" method="post" action="/save/">
 							<div class="form-control">
 								<label for="website">Website</label>
-								<input name="website" id="website" type="text">
+								<input name="website" required="true" id="website" type="text">
 								<label for="interval">Interval (sec)</label>
-								<input name="interval" id="interval" type="number">
+								<input name="interval" required="true" id="interval" max="86400" type="number">
 							</div>
 							<ul class="actions">
 								<li><input value="Add Website" type="submit"></li>
@@ -67,9 +67,25 @@
 		<!-- Section Two -->
 			<section id="two" class="wrapper special">
 				<div class="inner">
+					<!--WEBSITES-->
 					<header>
 						<h2>Tracked websites</h2>
 					</header>
+					<ul>
+						{{range .Websites}}
+								<li class="done">{{.Address}}</li>
+						{{end}}
+					</ul>
+					<!--EMAIL-->
+					<header>
+						<h2>Email</h2>
+					</header>
+					<ul>
+						{{range .User}}
+							<li class="done">{{.Email}}</li>
+						{{end}}
+					</ul>
+					<!--TELEGRAM-->
 				</div>
 			</section>
 

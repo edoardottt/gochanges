@@ -23,17 +23,17 @@ import (
 )
 
 //checkEmail checks if the email inputted is a valid email.
-func checkEmail(email string) bool {
+func CheckEmail(email string) bool {
 	var rxEmail = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 
 	if len(email) > 254 || !rxEmail.MatchString(email) {
 		return false
 	}
-	return true
+	return true && len(email) > 0
 }
 
 //checkWebsite checks if the website inputted is a valid URL.
-func checkWebsite(website string) (bool, error) {
+func CheckWebsite(website string) (bool, error) {
 	u, err := url.Parse(website)
 	if err != nil {
 		err = errors.New("website inputted is not a valid URL")
@@ -55,7 +55,7 @@ func checkTelegram(telegram string) bool {
 }
 
 //checkInterval checks if the interval inputted is a valid interval.
-func checkInterval(interval string) (bool, error) {
+func CheckInterval(interval string) (bool, error) {
 	i, err := strconv.Atoi(interval)
 	if err != nil {
 		return false, err

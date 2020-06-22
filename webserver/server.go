@@ -17,9 +17,14 @@ package webserver
 
 import (
 	"fmt"
+	"github.com/edoardottt/gochanges/db"
+	"github.com/edoardottt/gochanges/scraper"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 	"strings"
 )
 
@@ -49,14 +54,57 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 
 // TODO
 func handlerSave(w http.ResponseWriter, r *http.Request) {
+	connString := os.Getenv("MONGO_CONN")
+	//connString := "mongodb://hostname:27017"
+
+	dbName := os.Getenv("DB_NAME")
+	//dbName := "gochangesdb"
+
 	email := r.FormValue("email")
 	telegram := r.FormValue("telegram")
 	website := r.FormValue("website")
 	interval := r.FormValue("interval")
-	fmt.Println(email)
-	fmt.Println(telegram)
-	fmt.Println(website)
-	fmt.Println(interval)
+
+	// CHECK INPUT
+	emailOk := CheckEmail(email)
+	telegramOk := checkTelegram(telegram)
+	websiteOk,err := CheckWebsite(website)
+	intervalOk,err := CheckInterval(interval)
+
+	// IF EMAIL OK, INSERT EMAIL
+	if emailOk {
+		user := db.User{Email: email}
+		db.InsertUser(connString, dbName, user)
+	}
+
+	// IF TELEGRAM OK, INSERT TELEGRAM
+	if telegramOk {
+		fmt.Println(telegram)
+	}
+
+	if websiteOk && intervalOk {
+		sec,_ := strconv.Atoi(interval)
+		websiteS := db.Website{Address: website, Body: scraper.GetContent(website), Timestamp: scraper.GetCurrentTimestamp(), Seconds: sec}
+		db.InsertWebsite(connString, dbName, websiteS)
+	}
+
+	Websites := db.GetAllWebsites(connString, dbName)
+	tmpl, err := template.ParseFiles("home.html")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintf(w,"500 | Internal Server Error")
+		return
+	}
+	// only if there are some data available print on page
+	if len(Websites) != 0 {
+		tmpl.Execute(w, Websites)
+	}
+
+	// DEBUG PRINTING
+	fmt.Println("Email:", email)
+	fmt.Println("Telegram:", telegram)
+	fmt.Println("Website:", website)
+	fmt.Println("Interval:", interval)
 	fmt.Fprintf(w, "%s %s %s %s", email, telegram, website, interval)
 }
 
