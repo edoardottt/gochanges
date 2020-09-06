@@ -1,3 +1,7 @@
+<p align="center">
+  ARCHIVED (AT LEAST FOR NOW). NO LONGER MANTAINED.
+</p>
+
 
 <p align="center">
   <!-- logo -->
