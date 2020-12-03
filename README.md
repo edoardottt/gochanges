@@ -83,7 +83,18 @@ Requirements 🔍
 - docker
 - docker-compose
 
-**Tested on my lightweight laptop, correctly monitors over 150 websites**
+**Tested on my lightweight laptop, THE ENGINE correctly monitors over 150 websites, the backend is not communicating with the frontend.**
+
+Use these:
+
+- https://github.com/n1trux/awesome-sysadmin#monitoring
+- https://github.com/statping/statping
+- https://github.com/topics/website-monitor
+- https://github.com/brotandgames/ciao
+- https://github.com/710leo/urlooker
+- https://github.com/ParryQiu/GuGuJianKong
+- https://github.com/JuanmaMenendez/website-change-monitor
+
 
 Get Started 🎉
 -------
