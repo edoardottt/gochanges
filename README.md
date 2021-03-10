@@ -115,6 +115,13 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 
 **To Do:**
 
+- [ ] Understandable frontend
+- [ ] Move to hmtl template
+- [ ] Data in frontend (emails, telegram tokens and websites tracked)
+- [ ] Dynamic Home Page
+- [ ] Tests
+- [ ] Integrate Telegram-botAPI
+- [ ] Send mail using OAuth2.0
 - [x] Add comments
 - [x] Storing data into MongoDB
 - [x] Dockerfile
@@ -123,20 +130,13 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Common errors
 - [x] Mount external volume
 - [x] Read input by localhost:xxxx
-- [ ] Understandable frontend
-- [ ] Move to hmtl template
-- [ ] Data in frontend (emails, telegram tokens and websites tracked)
-- [ ] Dynamic Home Page
-- [ ] Tests
-- [ ] Integrate Telegram-botAPI
-- [ ] Send mail using OAuth2.0
 
---------------------------
+
 If you liked it drop a :star:
---------------------------
+------
 
 https://www.edoardoottavianelli.it for contact me.
 
 
   
-                                                                            Edoardo Ottavianelli ©
+                                                                            Edoardo Ottavianelli
