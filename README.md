@@ -131,12 +131,8 @@ Just open an issue/pull request. See also [CONTRIBUTING.md](https://github.com/e
 - [x] Mount external volume
 - [x] Read input by localhost:xxxx
 
+License 📝
+-------
 
-If you liked it drop a :star:
-------
-
-https://www.edoardoottavianelli.it for contact me.
-
-
-  
-                                                                            Edoardo Ottavianelli
+This repository is under [GNU Affero General Public License v3.0](https://github.com/edoardottt/gochanges/blob/master/LICENSE).  
+[edoardoottavianelli.it](https://www.edoardoottavianelli.it) for contact me.
