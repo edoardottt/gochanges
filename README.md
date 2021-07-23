@@ -85,7 +85,7 @@ Requirements 🔍
 
 **Tested on my lightweight laptop, THE ENGINE correctly monitors over 150 websites, the backend is not communicating with the frontend.**
 
-Use these:
+**Use these solutions:**
 
 - https://github.com/n1trux/awesome-sysadmin#monitoring
 - https://github.com/statping/statping
