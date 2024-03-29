@@ -11,9 +11,10 @@ Requirements: Docker.
 ```bash
 git clone $REPOSITORY
 
+# Start using the standard docker repertoire: up, down, rm etc.
 docker-compose up -d
 
-# Then go to http://localhost:3822 to see the UI; or you can talk to the server using http:
+# Then go to http://localhost:3822/docs to see the Swagger UI; or you can talk to the server using http:
 
 # To watch a new URL:
 curl -X POST http://localhost:3822/add-watch \
@@ -30,6 +31,16 @@ curl http://localhost:3822/tracked-sites
 curl -X POST http://localhost:3822/add-watch \
   -d '{"url":"https://google.com","mailTo":"user.name@provider.com"}'
 # {"result":"success"}
+```
+
+## Iterative development
+
+```bash
+docker-compose up -d mongodb # required for keeping track of state
+
+go run main.go # edit and rerun this command
+
+# If you're already listening on another port, or you want to use another mongodb, etc, then check out the environment variables in main.go.
 ```
 
 ## Credits and project info

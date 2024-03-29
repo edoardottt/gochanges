@@ -29,10 +29,11 @@ import (
 )
 
 // TODO
-func StartListen() {
+func StartListen(port int) {
 	http.HandleFunc("/", handlerHome)
 	http.HandleFunc("/save/", handlerSave)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	portString := fmt.Sprintf(":%d", port)
+	log.Fatal(http.ListenAndServe(portString, nil))
 }
 
 // TODO
