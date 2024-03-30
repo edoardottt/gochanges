@@ -63,15 +63,20 @@ $ tree -P '*.go' --prune .
 ├── db
 │   ├── connection.go               # Wrapper for handling creation of connections 
 │   │                               # from db connection string
-│   ├── transactions.go             # Business logic transactions
-│   └── storedTypes.go              # Domain types to be stored in MongoDB
+│   ├── OnScrapeFunction.go         # the 'OnScrapeFunction' which is called to persist  
+│   │                               # each scrape
+│   ├── storedTypes.go              # Domain types to be stored in MongoDB
+│   └── transactions.go             # Business logic transactions
 ├── main.go                         # Main file, including configuration parsing
 │                                   # and composing together all the functionality.
 ├── scraper             
 │   └── StartMonitoring.go          # Schedules a monitoring task for a given URL.
-└── webserver
-    ├── parseScrapeTargetRequest.go # Parses and validates a http request to scrape a website.
-    └── server.go                   # Maps routes to functionality; starts the server
+├── restServer
+│   ├── parseScrapeTargetRequest.go # Parses and validates a http request to scrape a website.
+│   └── server.go                   # Maps routes to functionality; starts the server
+└── websocketServer
+    └── server.go                   # Instantiation of the websocket server + implementation of
+                                    # OnScrapeFunction for the websockets
 ```
 
 ## Credits and project info
