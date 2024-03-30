@@ -1,136 +1,71 @@
-/*
-This file is under GNU AFFERO GENERAL PUBLIC LICENSE
-
-Permissions of this strongest copyleft license are conditioned
-on making available complete source code of licensed works and
-modifications, which include larger works using a licensed work,
-under the same license. Copyright and license notices must be preserved.
-Contributors provide an express grant of patent rights.
-When a modified version is used to provide a service over a network,
-the complete source code of the modified version must be made available.
-
-Edoardo Ottavianelli, https://edoardoottavianelli.it
-
-*/
+/* This file is under GNU AFFERO GENERAL PUBLIC LICENSE */
 
 package webserver
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/edoardottt/gochanges/db"
-	"github.com/edoardottt/gochanges/scraper"
-	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
-	"strconv"
-	"strings"
+
+	"github.com/edoardottt/gochanges/db"
+	"github.com/edoardottt/gochanges/scraper"
 )
 
-// TODO
-func StartListen(port int) {
-	http.HandleFunc("/", handlerHome)
-	http.HandleFunc("/save/", handlerSave)
+// HTTP Server, excluding singleton modules (i.e. http and scraper).
+type httpServer struct {
+	db db.DatabaseConnection
+	// http
+	// scraper
+}
+
+func MakeHTTPServer(db_ db.DatabaseConnection) *httpServer {
+	return &httpServer{
+		db: db_,
+	}
+}
+
+// Add all routes and start the http listener.
+func (s *httpServer) StartListen(port int) {
+	http.HandleFunc("/scrapeTarget", s.handleScrapeTarget)
 	portString := fmt.Sprintf(":%d", port)
+	log.Println(fmt.Sprintf("Listening on %s", portString))
 	log.Fatal(http.ListenAndServe(portString, nil))
 }
 
-// TODO
-func handlerHome(w http.ResponseWriter, r *http.Request) {
-
-	setContentType(w, r)
-
-	URI := r.RequestURI
-	if URI == "/" {
-		URI = "./fe/home.html"
-	} else {
-		URI = "." + URI
-	}
-
-	page, _ := loadPage(URI)
-
-	fmt.Fprintf(w, "%s", page)
+type scrapeTargetGetResponse struct {
+	ScrapeTargets []db.ScrapeTarget `json:"scrapeTargets"`
 }
 
-// TODO
-func handlerSave(w http.ResponseWriter, r *http.Request) {
-	connString := os.Getenv("MONGO_CONN")
-	//connString := "mongodb://hostname:27017"
-
-	dbName := os.Getenv("DB_NAME")
-	//dbName := "gochangesdb"
-
-	email := r.FormValue("email")
-	telegram := r.FormValue("telegram")
-	website := r.FormValue("website")
-	interval := r.FormValue("interval")
-
-	// CHECK INPUT
-	emailOk := CheckEmail(email)
-	telegramOk := checkTelegram(telegram)
-	websiteOk,err := CheckWebsite(website)
-	intervalOk,err := CheckInterval(interval)
-
-	// IF EMAIL OK, INSERT EMAIL
-	if emailOk {
-		user := db.User{Email: email}
-		db.InsertUser(connString, dbName, user)
+// Handle the /scrapeTarget endpoint, including GET and PUT.
+func (s *httpServer) handleScrapeTarget(w http.ResponseWriter, r *http.Request) {
+	log.Println("Got a /scrapeTarget request")
+	switch r.Method {
+	case http.MethodGet:
+		scrapeTargets := scrapeTargetGetResponse{s.db.GetScrapeTargets()}
+		jsonData, err := json.Marshal(scrapeTargets)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.Write(jsonData)
+	case http.MethodPost:
+		var scrapeTargetRequest ScrapeTargetRequest
+		if err := parseScrapeTargetRequest(r, &scrapeTargetRequest); err != nil {
+			log.Print(err.Error())
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+		scrapeTarget := db.ScrapeTarget{
+			Url:                     scrapeTargetRequest.Url,
+			LastBody:                "",
+			MonitorIntervalSeconds:  scrapeTargetRequest.MonitorIntervalSeconds,
+			LastMonitoredUnixMillis: scraper.GetCurrentTimestamp(),
+			LastChangedUnixMillis:   scraper.GetCurrentTimestamp(),
+		}
+		log.Printf("Got request to monitor new url %s", scrapeTarget.Url)
+		go scraper.StartMonitoring(scrapeTarget, &s.db)
+		w.Write([]byte("{\"result\":\"success\"}")) // easier to do inline than error check
+	default:
+		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
-
-	// IF TELEGRAM OK, INSERT TELEGRAM
-	if telegramOk {
-		fmt.Println(telegram)
-	}
-
-	if websiteOk && intervalOk {
-		sec,_ := strconv.Atoi(interval)
-		websiteS := db.Website{Address: website, Body: scraper.GetContent(website), Timestamp: scraper.GetCurrentTimestamp(), Seconds: sec}
-		db.InsertWebsite(connString, dbName, websiteS)
-	}
-
-	Websites := db.GetAllWebsites(connString, dbName)
-	tmpl, err := template.ParseFiles("home.html")
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w,"500 | Internal Server Error")
-		return
-	}
-	// only if there are some data available print on page
-	if len(Websites) != 0 {
-		tmpl.Execute(w, Websites)
-	}
-
-	// DEBUG PRINTING
-	fmt.Println("Email:", email)
-	fmt.Println("Telegram:", telegram)
-	fmt.Println("Website:", website)
-	fmt.Println("Interval:", interval)
-	fmt.Fprintf(w, "%s %s %s %s", email, telegram, website, interval)
-}
-
-// TODO
-func loadPage(filename string) (string, error) {
-	body, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return "", err
-	}
-	return string(body), nil
-}
-
-func setContentType(w http.ResponseWriter, r *http.Request) {
-
-	path := r.URL.Path
-	contentType := "text/html"
-
-	if strings.HasSuffix(path, ".css") {
-		contentType = "text/css"
-	} else if strings.HasSuffix(path, ".js") {
-		contentType = "application/javascript"
-	} else if strings.HasSuffix(path, ".png") {
-		contentType = "image/png"
-	}
-
-	w.Header().Set("Content-Type", contentType)
-
 }

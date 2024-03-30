@@ -50,17 +50,17 @@ go run main.go # edit and rerun this command
 $ tree -P '*.go' --prune .
 .
 ├── db
-│   ├── storedTypes.go # Data types
-│   └── initdb.go      # MongoDB constructor
-├── main.go            # Main file.
-├── scraper
-│   ├── connect.go     # Interface for the scraper, including dynamically adding sites to be 
-│   │                  # scraped, scheduling, etc.
-│   └── difference.go  # Determines whether the http site has actually changed.
+│   ├── connection.go               # Wrapper for handling creation of connections 
+│   │                               # from db connection string
+│   ├── transactions.go             # Business logic transactions
+│   └── storedTypes.go              # Domain types to be stored in MongoDB
+├── main.go                         # Main file, including configuration parsing
+│                                   # and composing together all the functionality.
+├── scraper             
+│   └── StartMonitoring.go          # Schedules a monitoring task for a given URL.
 └── webserver
-    ├── webserver.go   # Defines and constructs the webserver struct
-    └── server.go      # Define each route of the webserver
-
+    ├── parseScrapeTargetRequest.go # Parses and validates a http request to scrape a website.
+    └── server.go                   # Maps routes to functionality; starts the server
 ```
 
 ## Credits and project info
