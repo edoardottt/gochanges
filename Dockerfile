@@ -1,14 +1,6 @@
 # Start from the latest golang base image
 FROM golang:latest
 
-# Add env vars
-ENV MONGO_CONN="mongodb://172.17.0.1:27017"
-ENV DB_NAME="gochangesdb"
-
-
-# Add Maintainer Info
-LABEL maintainer="edoardottt <edoardott@gmail.com>"
-
 # Set the Current Working Directory inside the container
 WORKDIR /gochanges
 
@@ -27,4 +19,4 @@ RUN go build
 # Run the Go app
 CMD ["./gochanges"]
 
-EXPOSE 8080
+EXPOSE 3822

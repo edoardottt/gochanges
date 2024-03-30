@@ -5,14 +5,19 @@ services:
 
   mongo:
     image: 'mongo:latest'
-    container_name: 'mongo'
+    hostname: 'mongo'
     volumes:
-      - /mongo-volume:/data/db
+      - mongo_data:/data/db
     ports:
       - '27017:27017'
 
   gochanges:
     restart: always
     build: .
+    environment:
+      - MONGO_CONN=mongodb://mongo:27017
     ports:
-     - "8080:8080"
+     - "3822:3822"
+
+volumes:
+  mongo_data:
