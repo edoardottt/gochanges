@@ -14,23 +14,22 @@ git clone $REPOSITORY
 # Start using the standard docker repertoire: up, down, rm etc.
 docker-compose up -d
 
-# Then go to http://localhost:3822/docs to see the Swagger UI; or you can talk to the server using http:
-
 # To watch a new URL:
-curl -X POST http://localhost:3822/add-watch \
-  -d '{"url":"https://google.com","intervalMs":60000}'
+curl -X POST http://localhost:3822/scrapeTarget \
+  -d '{"url":"https://google.com","monitorIntervalSeconds":300}'
 # {"result":"success"}
 
-# To see what has changed:
-curl http://localhost:3822/tracked-sites 
-# {"tracked-sites": [
-#   "https://google.com": {"lastChanged": "2024-03-29T07:41:51.296Z"} 
+# To see all current scraped targets: (You are probably most interested in the 'lastChanged' field)
+curl http://localhost:3822/scrapeTarget
+# {"scrapeTargets": [
+#   {
+#     "url": "https://www.google.com",
+#     "lastBody": "...",
+#     "monitorIntervalSeconds": 300,
+#     "lastMonitoredUnixMillis": 1648719600,
+#     "lastChangedUnixMillis": 1648705200
+#   }
 # ]}
-
-# To watch a new URL and send an email when it has changed:
-curl -X POST http://localhost:3822/add-watch \
-  -d '{"url":"https://google.com","mailTo":"user.name@provider.com"}'
-# {"result":"success"}
 ```
 
 ## Iterative development
@@ -40,7 +39,28 @@ docker-compose up -d mongodb # required for keeping track of state
 
 go run main.go # edit and rerun this command
 
+# Then you should be able to execute the commands above!
+
 # If you're already listening on another port, or you want to use another mongodb, etc, then check out the environment variables in main.go.
+```
+
+## Project Layout
+
+```bash
+$ tree -P '*.go' --prune .
+.
+├── db
+│   ├── storedTypes.go # Data types
+│   └── initdb.go      # MongoDB constructor
+├── main.go            # Main file.
+├── scraper
+│   ├── connect.go     # Interface for the scraper, including dynamically adding sites to be 
+│   │                  # scraped, scheduling, etc.
+│   └── difference.go  # Determines whether the http site has actually changed.
+└── webserver
+    ├── webserver.go   # Defines and constructs the webserver struct
+    └── server.go      # Define each route of the webserver
+
 ```
 
 ## Credits and project info
