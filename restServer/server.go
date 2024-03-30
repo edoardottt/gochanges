@@ -61,11 +61,11 @@ func (s *httpServer) handleScrapeTarget(w http.ResponseWriter, r *http.Request) 
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 		scrapeTarget := db.ScrapeTarget{
-			Url:                     scrapeTargetRequest.Url,
-			LastBody:                "",
-			MonitorIntervalSeconds:  scrapeTargetRequest.MonitorIntervalSeconds,
-			LastMonitoredUnixMillis: scraper.GetCurrentTimestamp(),
-			LastChangedUnixMillis:   scraper.GetCurrentTimestamp(),
+			Url:                    scrapeTargetRequest.Url,
+			LastBody:               "",
+			MonitorIntervalSeconds: scrapeTargetRequest.MonitorIntervalSeconds,
+			LastMonitoredUnixSecs:  scraper.GetCurrentTimestamp(),
+			LastChangedUnixSecs:    scraper.GetCurrentTimestamp(),
 		}
 		log.Printf("Got request to monitor new url %s", scrapeTarget.Url)
 		go s.scraperInstance.StartMonitoring(scrapeTarget)

@@ -26,8 +26,8 @@ curl http://localhost:3822/scrapeTarget
 #     "url": "https://www.google.com",
 #     "lastBody": "...",
 #     "monitorIntervalSeconds": 300,
-#     "lastMonitoredUnixMillis": 1648719600,
-#     "lastChangedUnixMillis": 1648705200
+#     "lastMonitoredUnixSecs": 1648719600,
+#     "lastChangedUnixSecs": 1648705200
 #   }
 # ]}
 ```
@@ -40,7 +40,7 @@ Connecting to `ws://localhost:3822/ws` will open a websocket, which will receive
 ws = new WebSocket("ws://localhost:3823/ws");
 ws.addEventListener("message",(evt)=>console.log(evt.data));
 // Then after you curl -X POST
-// {"url":"https://google.com","lastBody":"...","monitorIntervalSeconds": 300, "lastMonitoredUnixMillis": 1648719600,"lastChangedUnixMillis":1711805622}
+// {"url":"https://google.com","lastBody":"...","monitorIntervalSeconds": 300, "lastMonitoredUnixSecs": 1648719600,"lastChangedUnixSecs":1711805622}
 ```
 
 ## Iterative development

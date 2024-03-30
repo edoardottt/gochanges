@@ -33,10 +33,10 @@ func (s *Scraper) MonitorAndUpdate(scrapeTarget db.ScrapeTarget) {
 	body := GetContent(scrapeTarget.Url)
 	newTimestamp := GetCurrentTimestamp()
 	edited := checkBodyChanged(scrapeTarget.LastBody, body)
-	scrapeTarget.LastMonitoredUnixMillis = newTimestamp
+	scrapeTarget.LastMonitoredUnixSecs = newTimestamp
 	if edited {
 		scrapeTarget.LastBody = body
-		scrapeTarget.LastChangedUnixMillis = newTimestamp
+		scrapeTarget.LastChangedUnixSecs = newTimestamp
 	}
 	for _, fn := range s.onScrapeFunctions {
 		fn(scrapeTarget)
