@@ -1,6 +1,6 @@
 /* This file is under GNU AFFERO GENERAL PUBLIC LICENSE */
 
-package webserver
+package restServer
 
 import (
 	"encoding/json"
@@ -14,14 +14,19 @@ import (
 
 // HTTP Server, excluding singleton modules (i.e. http and scraper).
 type httpServer struct {
-	db db.DatabaseConnection
+	db              db.DatabaseConnection
+	scraperInstance scraper.Scraper
 	// http
 	// scraper
 }
 
-func MakeHTTPServer(db_ db.DatabaseConnection) *httpServer {
+func MakeHTTPServer(
+	db db.DatabaseConnection,
+	scraperInstance scraper.Scraper,
+) *httpServer {
 	return &httpServer{
-		db: db_,
+		db:              db,
+		scraperInstance: scraperInstance,
 	}
 }
 
@@ -29,7 +34,7 @@ func MakeHTTPServer(db_ db.DatabaseConnection) *httpServer {
 func (s *httpServer) StartListen(port int) {
 	http.HandleFunc("/scrapeTarget", s.handleScrapeTarget)
 	portString := fmt.Sprintf(":%d", port)
-	log.Println(fmt.Sprintf("Listening on %s", portString))
+	log.Printf("Listening on %s", portString)
 	log.Fatal(http.ListenAndServe(portString, nil))
 }
 
@@ -63,7 +68,7 @@ func (s *httpServer) handleScrapeTarget(w http.ResponseWriter, r *http.Request) 
 			LastChangedUnixMillis:   scraper.GetCurrentTimestamp(),
 		}
 		log.Printf("Got request to monitor new url %s", scrapeTarget.Url)
-		go scraper.StartMonitoring(scrapeTarget, &s.db)
+		go s.scraperInstance.StartMonitoring(scrapeTarget)
 		w.Write([]byte("{\"result\":\"success\"}")) // easier to do inline than error check
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)

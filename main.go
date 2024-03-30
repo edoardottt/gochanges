@@ -6,8 +6,9 @@ import (
 	"strconv"
 
 	"github.com/edoardottt/gochanges/db"
+	"github.com/edoardottt/gochanges/restServer"
 	"github.com/edoardottt/gochanges/scraper"
-	"github.com/edoardottt/gochanges/webserver"
+	"github.com/edoardottt/gochanges/websocketServer"
 )
 
 type config struct {
@@ -26,14 +27,21 @@ func getEnvOrDefault(key string, defaultValue string) string {
 func main() {
 	config := getConfigFromEnvironment()
 
-	// Take all websites into mongodb
-	// Start monitoring all websites yet present
+	websocketServerInstance := websocketServer.StartWebsocketServer()
+
+	actions := [](func(db.ScrapeTarget)){
+		config.DatabaseConnection.OnScrapeFunction,
+		websocketServerInstance.OnScrapeFunction,
+	}
+	scraperInstance := scraper.BuildScraper(actions)
+
+	// Start monitoring all websites already present
 	websites := config.DatabaseConnection.GetScrapeTargets()
 	for _, website := range websites {
-		go scraper.StartMonitoring(website, &config.DatabaseConnection)
+		go scraperInstance.StartMonitoring(website)
 	}
 
-	httpServer := webserver.MakeHTTPServer(config.DatabaseConnection)
+	httpServer := restServer.MakeHTTPServer(config.DatabaseConnection, scraperInstance)
 	httpServer.StartListen(config.Port)
 }
 

@@ -9,26 +9,38 @@ import (
 	"github.com/edoardottt/gochanges/db"
 )
 
-//Start monitoring a given website.
-func StartMonitoring(scrapeTarget db.ScrapeTarget, dbc *db.DatabaseConnection) {
-	log.Printf("Starting monitoring of %s", scrapeTarget.Url)
+type Scraper struct {
+	onScrapeFunctions [](func(db.ScrapeTarget))
+}
 
-	MonitorAndUpdate(scrapeTarget, dbc)
-	for range time.Tick(time.Duration(scrapeTarget.MonitorIntervalSeconds) * time.Second) {
-		MonitorAndUpdate(scrapeTarget, dbc)
+func BuildScraper(onScrapeFunctions [](func(db.ScrapeTarget))) Scraper {
+	return Scraper{
+		onScrapeFunctions: onScrapeFunctions,
 	}
 }
 
-func MonitorAndUpdate(scrapeTarget db.ScrapeTarget, dbc *db.DatabaseConnection) {
+//Start monitoring a given website.
+func (s *Scraper) StartMonitoring(scrapeTarget db.ScrapeTarget) {
+	log.Printf("Starting monitoring of %s", scrapeTarget.Url)
+
+	s.MonitorAndUpdate(scrapeTarget)
+	for range time.Tick(time.Duration(scrapeTarget.MonitorIntervalSeconds) * time.Second) {
+		s.MonitorAndUpdate(scrapeTarget)
+	}
+}
+
+func (s *Scraper) MonitorAndUpdate(scrapeTarget db.ScrapeTarget) {
 	body := GetContent(scrapeTarget.Url)
 	newTimestamp := GetCurrentTimestamp()
 	edited := checkBodyChanged(scrapeTarget.LastBody, body)
+	scrapeTarget.LastMonitoredUnixMillis = newTimestamp
 	if edited {
 		scrapeTarget.LastBody = body
 		scrapeTarget.LastChangedUnixMillis = newTimestamp
 	}
-	scrapeTarget.LastMonitoredUnixMillis = newTimestamp
-	dbc.InsertScrapeTargets([]db.ScrapeTarget{scrapeTarget})
+	for _, fn := range s.onScrapeFunctions {
+		fn(scrapeTarget)
+	}
 }
 
 //GetContent returns the content of a website

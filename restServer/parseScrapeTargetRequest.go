@@ -1,4 +1,4 @@
-package webserver
+package restServer
 
 import (
 	"encoding/json"
