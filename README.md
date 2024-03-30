@@ -2,7 +2,7 @@
 
 ![gochanges logo](images/gochanges.png)
 
-gochanges is a website changes tracker for developers (packaged as a microservice). It is broken up into a backend with a clean API and a frontend.
+gochanges is a website changes tracker for developers (packaged as a microservice).
 
 ## User guide
 
