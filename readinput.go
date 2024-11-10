@@ -9,7 +9,7 @@ Contributors provide an express grant of patent rights.
 When a modified version is used to provide a service over a network,
 the complete source code of the modified version must be made available.
 
-Edoardo Ottavianelli, https://edoardoottavianelli.it
+Edoardo Ottavianelli, https://edoardottt.com
 
 */
 
@@ -79,7 +79,7 @@ func IsEmail(address string) bool {
 }
 
 //IsWebsite tell us if a string is a website url or not.
-//format: https://www.edoardoottavianelli.it/
+//format: https://www.edoardottt.com/
 func IsWebsite(address string) bool {
 	_, err := url.ParseRequestURI(address)
 	if err != nil {

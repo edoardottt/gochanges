@@ -24,14 +24,14 @@
     <img src="https://goreportcard.com/badge/github.com/edoardottt/gochanges" alt="Go report card" />
   </a>
       <!-- open-issues -->
-  <a href="https://edoardoottavianelli.it">
+  <a href="https://edoardottt.com">
     <img src="https://img.shields.io/github/issues/Naereen/StrapDown.js.svg" alt="open issues" />
   </a>
   
   <br>
   
   <!-- ask-me-anything -->
-  <a href="https://edoardoottavianelli.it">
+  <a href="https://edoardottt.com">
     <img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="ask me anything" />
   </a>
   <!-- license AGPLv3.0 -->
@@ -41,7 +41,7 @@
 
   <br>
     <!-- Open-source-love -->
-  <a href="https://edoardoottavianelli.it">
+  <a href="https://edoardottt.com">
     <img src="https://badges.frapsoft.com/os/v2/open-source.png?v=103" alt="opensourcelove" />
   </a>
   <!-- Tweet -->
@@ -124,4 +124,4 @@ License 📝
 -------
 
 This repository is under [GNU Affero General Public License v3.0](https://github.com/edoardottt/gochanges/blob/master/LICENSE).  
-[edoardoottavianelli.it](https://www.edoardoottavianelli.it) to contact me.
+[edoardottt.com](https://edoardottt.com) to contact me.

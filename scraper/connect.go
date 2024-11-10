@@ -9,7 +9,7 @@ Contributors provide an express grant of patent rights.
 When a modified version is used to provide a service over a network,
 the complete source code of the modified version must be made available.
 
-Edoardo Ottavianelli, https://edoardoottavianelli.it
+Edoardo Ottavianelli, https://edoardottt.com
 */
 
 package scraper
