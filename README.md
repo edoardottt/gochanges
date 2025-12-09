@@ -80,9 +80,6 @@ Requirements 🔍
 - https://github.com/statping/statping
 - https://github.com/topics/website-monitor
 - https://github.com/brotandgames/ciao
-- https://github.com/710leo/urlooker
-- https://github.com/ParryQiu/GuGuJianKong
-- https://github.com/JuanmaMenendez/website-change-monitor
 
 
 Get Started 🎉
