@@ -76,7 +76,7 @@ Requirements 🔍
 **Use these solutions:**
 
 - https://changedetection.io/
-- https://github.com/n1trux/awesome-sysadmin#monitoring
+- https://github.com/awesome-foss/awesome-sysadmin#monitoring
 - https://github.com/statping/statping
 - https://github.com/topics/website-monitor
 - https://github.com/brotandgames/ciao
